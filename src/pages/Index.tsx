@@ -123,8 +123,8 @@ const Index = () => {
                   className="group"
                   aria-label={social.label}
                 >
-                  <div className={`p-4 rounded-xl ${social.bgColor} backdrop-blur-sm text-neutral-600 dark:text-neutral-300 transform transition-all duration-200 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-neutral-200/50 dark:group-hover:shadow-neutral-900/50`}>
-                    <social.icon className="w-6 h-6" />
+                  <div className={`p-4 rounded-xl ${social.bgColor} backdrop-blur-sm text-neutral-600 dark:text-neutral-300 transform transition-all duration-200 hover:bg-blue-100 dark:hover:bg-blue-900/30 group-hover:scale-105 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:shadow-neutral-200/50 dark:group-hover:shadow-neutral-900/50`}>
+                    <social.icon className="w-6 h-6 transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400" />
                   </div>
                 </a>
               ))}
