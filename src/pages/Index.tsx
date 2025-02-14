@@ -101,7 +101,7 @@ const Index = () => {
                   className="border-neutral-200 dark:border-neutral-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 group"
                 >
                   <a 
-                    href="https://cal.com/simonbromander"
+                    href="https://cal.com/simonbromander/office-hours-startup?date=2025-02-14&month=2025-02"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center"
