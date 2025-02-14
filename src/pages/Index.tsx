@@ -1,3 +1,4 @@
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -79,6 +80,37 @@ const Index = () => {
                     <span className="text-lg">{achievement}</span>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20 space-y-6">
+              <div className="flex items-center space-x-4">
+                <div className="p-2 rounded-lg bg-blue-100/50 dark:bg-blue-900/20">
+                  <Calendar className="w-5 h-5 text-blue-700 dark:text-blue-300" />
+                </div>
+                <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100">
+                  Book Office Hours
+                </h2>
+              </div>
+              <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                I offer free 30-minute office hours to help startups with their product and UX challenges. Let's chat!
+              </p>
+              <div className="flex items-center">
+                <Button 
+                  asChild
+                  variant="outline"
+                  className="border-neutral-200 dark:border-neutral-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 group"
+                >
+                  <a 
+                    href="https://cal.com/simonbromander"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center"
+                  >
+                    <Calendar className="w-4 h-4 mr-2 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-200" />
+                    <span className="text-neutral-700 dark:text-neutral-300">Schedule a Call</span>
+                  </a>
+                </Button>
               </div>
             </div>
 
