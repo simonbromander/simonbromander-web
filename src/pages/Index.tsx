@@ -1,3 +1,4 @@
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,25 +14,25 @@ const Index = () => {
   const socialLinks = [
     { 
       icon: AtSign, 
-      url: "#", 
-      label: "Read.cv",
+      url: "https://www.threads.net/@simonbromander", 
+      label: "Threads",
       bgColor: "bg-neutral-100/80 dark:bg-neutral-800/80",
     },
     { 
       icon: Mail, 
-      url: "#", 
+      url: "mailto:me@simonbromander.com", 
       label: "Email",
       bgColor: "bg-neutral-100/80 dark:bg-neutral-800/80",
     },
     { 
       icon: BookOpen, 
-      url: "#", 
-      label: "Blog",
+      url: "https://substack.com/@simonbromander", 
+      label: "Substack",
       bgColor: "bg-neutral-100/80 dark:bg-neutral-800/80",
     },
     { 
       icon: Linkedin, 
-      url: "#", 
+      url: "https://www.linkedin.com/in/simonbromander/", 
       label: "LinkedIn",
       bgColor: "bg-neutral-100/80 dark:bg-neutral-800/80",
     },
