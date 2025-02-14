@@ -113,22 +113,28 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start animate-fade-up">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={social.label}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group"
-                  aria-label={social.label}
-                >
-                  <div className={`p-4 rounded-xl ${social.bgColor} backdrop-blur-sm text-neutral-600 dark:text-neutral-300 transform transition-all duration-200 hover:bg-blue-100 dark:hover:bg-blue-900/30 group-hover:scale-105 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:shadow-neutral-200/50 dark:group-hover:shadow-neutral-900/50`}>
-                    <social.icon className="w-6 h-6 transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400" />
-                  </div>
-                </a>
-              ))}
+            <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20">
+              <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 mb-6">Connect with me</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col items-center gap-3 p-4 rounded-xl backdrop-blur-sm bg-neutral-100/80 dark:bg-neutral-800/80 transition-all duration-200 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:-translate-y-1 hover:shadow-lg hover:shadow-neutral-200/50 dark:hover:shadow-neutral-900/50"
+                  >
+                    <div className="p-3 rounded-lg bg-white/50 dark:bg-neutral-700/50 group-hover:bg-blue-200/50 dark:group-hover:bg-blue-900/50 transition-colors">
+                      <social.icon className="w-5 h-5 text-neutral-600 dark:text-neutral-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+                    </div>
+                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                      {social.label}
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
+
           </div>
         </div>
       </div>
