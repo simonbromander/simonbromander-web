@@ -1,4 +1,3 @@
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -40,14 +39,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 py-12 px-4 relative overflow-hidden">
-      {/* Gradient Orbs */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2" />
       
       <div className="max-w-4xl mx-auto space-y-12 relative">
-        {/* Profile Section */}
         <div className="md:flex items-start space-y-8 md:space-y-0 md:space-x-12">
-          {/* Avatar and Name Section */}
           <div className="text-center md:text-left flex-shrink-0 md:sticky md:top-12">
             <div className="space-y-4">
               <Avatar className="w-32 h-32 mx-auto md:mx-0 border-4 border-white/80 dark:border-neutral-800/80 shadow-lg backdrop-blur-sm">
@@ -71,9 +67,7 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Main Content */}
           <div className="flex-grow space-y-8">
-            {/* Achievement Section */}
             <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20">
               <h2 className="text-4xl font-bold text-neutral-800 dark:text-neutral-100 mb-8">
                 From Design to Product Strategy
@@ -88,7 +82,6 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Booking Section */}
             <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20 space-y-6">
               <div className="flex items-center space-x-4">
                 <div className="p-2 rounded-lg bg-blue-100/50 dark:bg-blue-900/20">
@@ -120,8 +113,7 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="flex flex-wrap gap-4 animate-fade-up">
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start animate-fade-up">
               {socialLinks.map((social, index) => (
                 <a
                   key={social.label}
