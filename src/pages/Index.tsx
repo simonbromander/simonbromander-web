@@ -1,3 +1,4 @@
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -74,8 +75,8 @@ const Index = () => {
               </h2>
               <div className="space-y-4">
                 {achievements.map((achievement, index) => (
-                  <div key={index} className="flex items-center space-x-3 text-neutral-700 dark:text-neutral-300">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" />
+                  <div key={index} className="flex items-start space-x-3 text-neutral-700 dark:text-neutral-300">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-1" />
                     <span className="text-lg">{achievement}</span>
                   </div>
                 ))}
