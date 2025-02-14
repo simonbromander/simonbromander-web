@@ -1,3 +1,4 @@
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -42,9 +43,9 @@ const Index = () => {
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2" />
       
-      <div className="max-w-4xl mx-auto space-y-12 relative">
-        <div className="md:flex items-start space-y-8 md:space-y-0 md:space-x-12">
-          <div className="text-center md:text-left flex-shrink-0 md:sticky md:top-12">
+      <div className="max-w-4xl mx-auto relative">
+        <div className="md:flex md:gap-12">
+          <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 self-start">
             <div className="space-y-4">
               <Avatar className="w-32 h-32 mx-auto md:mx-0 border-4 border-white/80 dark:border-neutral-800/80 shadow-lg backdrop-blur-sm">
                 <AvatarImage src="/lovable-uploads/1630ba4e-617c-4ba9-beac-f977a3cd5ccd.png" />
@@ -67,7 +68,7 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="flex-grow space-y-8">
+          <div className="flex-grow space-y-8 mt-8 md:mt-0">
             <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20">
               <h2 className="text-4xl font-bold text-neutral-800 dark:text-neutral-100 mb-8">
                 From Design to Product Strategy
@@ -143,7 +144,6 @@ const Index = () => {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
       </div>
