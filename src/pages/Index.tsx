@@ -1,8 +1,7 @@
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AtSign, BookOpen, Linkedin, Mail, CheckCircle2, Calendar } from "lucide-react";
+import { AtSign, BookOpen, Linkedin, Mail, CheckCircle2, Calendar, Link2 } from "lucide-react";
 
 const Index = () => {
   const achievements = [
@@ -86,52 +85,30 @@ const Index = () => {
             <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20 space-y-6">
               <div className="flex items-center space-x-4">
                 <div className="p-2 rounded-lg bg-blue-100/50 dark:bg-blue-900/20">
-                  <Calendar className="w-5 h-5 text-blue-700 dark:text-blue-300" />
+                  <Link2 className="w-5 h-5 text-blue-700 dark:text-blue-300" />
                 </div>
                 <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100">
-                  Book Office Hours
+                  Links
                 </h2>
               </div>
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
-                I offer free 30-minute office hours to help startups with their product and UX challenges. Let's chat!
-              </p>
-              <div className="flex items-center">
-                <Button 
-                  asChild
-                  variant="outline"
-                  className="border-neutral-200 dark:border-neutral-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 group"
-                >
-                  <a 
-                    href="https://cal.com/simonbromander"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center"
-                  >
-                    <Calendar className="w-4 h-4 mr-2 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-200" />
-                    <span className="text-neutral-700 dark:text-neutral-300">Schedule a Call</span>
-                  </a>
-                </Button>
-              </div>
-            </div>
-
-            <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20">
-              <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 mb-6">Connect with me</h2>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="space-y-3">
                 {socialLinks.map((social) => (
-                  <a
+                  <Button 
                     key={social.label}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col items-center gap-3 p-4 rounded-xl backdrop-blur-sm bg-neutral-100/80 dark:bg-neutral-800/80 transition-all duration-200 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:-translate-y-1 hover:shadow-lg hover:shadow-neutral-200/50 dark:hover:shadow-neutral-900/50"
+                    asChild
+                    variant="outline"
+                    className="w-full border-neutral-200 dark:border-neutral-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 group justify-start"
                   >
-                    <div className="p-3 rounded-lg bg-white/50 dark:bg-neutral-700/50 group-hover:bg-blue-200/50 dark:group-hover:bg-blue-900/50 transition-colors">
-                      <social.icon className="w-5 h-5 text-neutral-600 dark:text-neutral-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
-                    </div>
-                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                      {social.label}
-                    </span>
-                  </a>
+                    <a 
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center"
+                    >
+                      <social.icon className="w-4 h-4 mr-3 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-200" />
+                      <span className="text-neutral-700 dark:text-neutral-300">{social.label}</span>
+                    </a>
+                  </Button>
                 ))}
               </div>
             </div>
