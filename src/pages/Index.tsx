@@ -37,8 +37,6 @@ const Index = () => {
     },
   ];
 
-  const baseUrl = import.meta.env.DEV ? '' : '/simonbromander-linktree';
-
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 py-12 px-4 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
@@ -49,7 +47,7 @@ const Index = () => {
           <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 self-start">
             <div className="space-y-4">
               <Avatar className="w-32 h-32 mx-auto md:mx-0 border-4 border-white/80 dark:border-neutral-800/80 shadow-lg backdrop-blur-sm">
-                <AvatarImage src={`${baseUrl}/lovable-uploads/1630ba4e-617c-4ba9-beac-f977a3cd5ccd.png`} />
+                <AvatarImage src="lovable-uploads/1630ba4e-617c-4ba9-beac-f977a3cd5ccd.png" />
                 <AvatarFallback>SB</AvatarFallback>
               </Avatar>
               <div>
