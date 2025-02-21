@@ -14,63 +14,30 @@ interface BlogPost {
 
 const Blog = () => {
   const { toast } = useToast();
-  const GITHUB_USERNAME = "simonbromander";
-  const GITHUB_REPO = "simonbromander-linktree";
   
   const { data: posts, isLoading, error } = useQuery({
     queryKey: ['blog-posts'],
     queryFn: async () => {
-      console.log('Fetching blog posts...');
-      const apiUrl = `https://api.pagescms.org/github/${GITHUB_USERNAME}/${GITHUB_REPO}/blog`;
-      console.log('API URL:', apiUrl);
+      console.log('Loading blog posts from content/blog directory...');
       
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-          },
-          mode: 'cors',
-        });
-        
-        console.log('Response status:', response.status);
-        console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-        
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('API Error Response:', errorText);
-          
-          if (response.status === 522) {
-            throw new Error('Connection timeout. Please try again later.');
-          }
-          
-          throw new Error(`Failed to fetch blog posts: ${response.status} ${errorText}`);
-        }
-        
-        const data = await response.json();
-        console.log('Fetched data:', data);
-        
-        if (!Array.isArray(data)) {
-          console.error('Unexpected response format:', data);
-          throw new Error('Invalid response format from API');
-        }
-        
-        return data as BlogPost[];
-      } catch (err) {
-        console.error('Fetch error:', err);
-        if (err instanceof TypeError && err.message.includes('Failed to fetch')) {
-          throw new Error('Network error. Please check your connection and try again.');
-        }
-        throw err;
-      }
+      // Since we're using Vite, we can use the import.meta.glob feature to load markdown files
+      const postFiles = import.meta.glob('/content/blog/*.md', { eager: true });
+      
+      const blogPosts: BlogPost[] = Object.entries(postFiles).map(([path, module]: [string, any]) => {
+        // Extract metadata from the markdown frontmatter
+        const { title, description, date, slug } = module.default;
+        return { title, description, date, slug };
+      });
+      
+      // Sort posts by date (most recent first)
+      return blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     },
-    retry: 1,
     meta: {
       onError: (error: Error) => {
-        console.error('Query error:', error);
+        console.error('Failed to load blog posts:', error);
         toast({
           title: "Error loading blog posts",
-          description: error.message || "Failed to load blog posts. Please ensure your repository is connected to PagesCMS.org and try again later.",
+          description: "Failed to load blog posts from content directory.",
           variant: "destructive",
         });
       }
@@ -123,17 +90,8 @@ const Blog = () => {
                     ))}
                   </div>
                 ) : error ? (
-                  <div className="text-red-600 dark:text-red-400 space-y-4">
-                    <p>Error loading blog posts. Please check:</p>
-                    <ol className="list-decimal list-inside space-y-2">
-                      <li>Your GitHub repository is connected to PagesCMS.org</li>
-                      <li>The blog collection is properly configured in .pages.yml</li>
-                      <li>You have at least one blog post in your repository</li>
-                      <li>Your repository name and username are correct ({GITHUB_USERNAME}/{GITHUB_REPO})</li>
-                    </ol>
-                    <p className="mt-4 text-sm">
-                      If the issue persists, check the browser console for more details.
-                    </p>
+                  <div className="text-red-600 dark:text-red-400">
+                    <p>Failed to load blog posts. Please check if the content/blog directory exists and contains markdown files.</p>
                   </div>
                 ) : posts?.length ? (
                   <div className="space-y-8">
@@ -164,7 +122,7 @@ const Blog = () => {
                   </div>
                 ) : (
                   <p className="text-neutral-600 dark:text-neutral-400">
-                    No blog posts found. Add your first post through PagesCMS.org.
+                    No blog posts found in the content/blog directory.
                   </p>
                 )}
               </div>
@@ -177,3 +135,4 @@ const Blog = () => {
 };
 
 export default Blog;
+
