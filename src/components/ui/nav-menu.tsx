@@ -23,21 +23,6 @@ export function NavMenu() {
               Start
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/blog"
-              className={({ isActive }) =>
-                cn(
-                  "inline-block px-4 py-2 text-sm font-medium transition-colors rounded-full",
-                  isActive
-                    ? "bg-blue-100/80 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
-                    : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100/80 dark:hover:bg-neutral-800/80 hover:text-neutral-900 dark:hover:text-neutral-100"
-                )
-              }
-            >
-              Blog
-            </NavLink>
-          </li>
         </ul>
       </div>
     </nav>
