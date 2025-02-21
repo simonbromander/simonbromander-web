@@ -20,24 +20,38 @@ const Blog = () => {
     queryFn: async () => {
       console.log('Loading blog posts from content/blog directory...');
       
-      // Since we're using Vite, we can use the import.meta.glob feature to load markdown files
-      const postFiles = import.meta.glob('/content/blog/*.md', { eager: true });
-      
-      const blogPosts: BlogPost[] = Object.entries(postFiles).map(([path, module]: [string, any]) => {
-        // Extract metadata from the markdown frontmatter
-        const { title, description, date, slug } = module.default;
-        return { title, description, date, slug };
-      });
-      
-      // Sort posts by date (most recent first)
-      return blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      try {
+        // Since we're using Vite, we can use the import.meta.glob feature to load markdown files
+        const postFiles = import.meta.glob('/content/blog/*.md', { eager: true });
+        console.log('Found post files:', Object.keys(postFiles));
+        
+        if (Object.keys(postFiles).length === 0) {
+          console.warn('No markdown files found in content/blog directory');
+          return [];
+        }
+        
+        const blogPosts: BlogPost[] = Object.entries(postFiles).map(([path, module]: [string, any]) => {
+          console.log('Processing post:', path);
+          console.log('Module content:', module);
+          
+          // Extract metadata from the markdown frontmatter
+          const { title, description, date, slug } = module.default;
+          return { title, description, date, slug };
+        });
+        
+        // Sort posts by date (most recent first)
+        return blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      } catch (err) {
+        console.error('Error processing blog posts:', err);
+        throw new Error('Failed to process blog posts: ' + (err as Error).message);
+      }
     },
     meta: {
       onError: (error: Error) => {
         console.error('Failed to load blog posts:', error);
         toast({
           title: "Error loading blog posts",
-          description: "Failed to load blog posts from content directory.",
+          description: "Failed to load blog posts: " + error.message,
           variant: "destructive",
         });
       }
@@ -135,4 +149,3 @@ const Blog = () => {
 };
 
 export default Blog;
-
