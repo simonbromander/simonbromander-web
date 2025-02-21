@@ -15,9 +15,10 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' &&
     componentTagger(),
-    Markdown({
-      mode: "html",
-    }),
+    {
+      ...Markdown(),
+      enforce: 'pre'
+    },
   ].filter(Boolean),
   resolve: {
     alias: {
