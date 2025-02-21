@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' &&
     componentTagger(),
     Markdown({
-      mode: 'html',
+      mode: ['html'],
     }),
   ].filter(Boolean),
   resolve: {
@@ -36,4 +36,3 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
-
