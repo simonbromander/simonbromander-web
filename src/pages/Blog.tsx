@@ -16,7 +16,7 @@ const Blog = () => {
           </h1>
           <div className="prose prose-neutral dark:prose-invert max-w-none">
             <p className="text-neutral-600 dark:text-neutral-400">
-              Content from Pages CMS will be integrated here. Currently showing placeholder content.
+              This blog uses PagesCMS.org with GitHub for content management. Set up your repository in PagesCMS.org to start adding blog posts here.
             </p>
           </div>
         </div>
@@ -26,3 +26,4 @@ const Blog = () => {
 };
 
 export default Blog;
+
