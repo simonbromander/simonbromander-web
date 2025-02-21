@@ -1,8 +1,8 @@
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AtSign, BookOpen, Linkedin, Mail, CheckCircle2, Calendar, Link2, Users, Camera } from "lucide-react";
-import { NavMenu } from "@/components/ui/nav-menu";
 
 const Index = () => {
   const achievements = [
@@ -48,8 +48,6 @@ const Index = () => {
     <div className="min-h-screen w-full bg-gradient-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 py-12 px-4 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2" />
-      
-      <NavMenu />
       
       <div className="max-w-4xl mx-auto relative mt-16">
         <div className="md:flex md:gap-12">
