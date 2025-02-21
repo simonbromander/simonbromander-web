@@ -25,13 +25,25 @@ const Blog = () => {
       console.log('API URL:', apiUrl);
       
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+          mode: 'cors',
+        });
+        
         console.log('Response status:', response.status);
         console.log('Response headers:', Object.fromEntries(response.headers.entries()));
         
         if (!response.ok) {
           const errorText = await response.text();
           console.error('API Error Response:', errorText);
+          
+          if (response.status === 522) {
+            throw new Error('Connection timeout. Please try again later.');
+          }
+          
           throw new Error(`Failed to fetch blog posts: ${response.status} ${errorText}`);
         }
         
@@ -46,6 +58,9 @@ const Blog = () => {
         return data as BlogPost[];
       } catch (err) {
         console.error('Fetch error:', err);
+        if (err instanceof TypeError && err.message.includes('Failed to fetch')) {
+          throw new Error('Network error. Please check your connection and try again.');
+        }
         throw err;
       }
     },
@@ -55,7 +70,7 @@ const Blog = () => {
         console.error('Query error:', error);
         toast({
           title: "Error loading blog posts",
-          description: error.message || "Failed to load blog posts. Please ensure your repository is connected to PagesCMS.org",
+          description: error.message || "Failed to load blog posts. Please ensure your repository is connected to PagesCMS.org and try again later.",
           variant: "destructive",
         });
       }
