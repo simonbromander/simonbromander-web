@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' &&
     componentTagger(),
-    Markdown.plugin({
+    Markdown({
       mode: ['html', 'toc', 'yaml'],
     }),
   ].filter(Boolean),
