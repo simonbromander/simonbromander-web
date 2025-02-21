@@ -2,6 +2,7 @@
 import { NavMenu } from "@/components/ui/nav-menu";
 import { BookOpen, Calendar, MessageSquare } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { useToast } from "@/components/ui/use-toast";
 
 interface BlogPost {
   title: string;
@@ -11,19 +12,36 @@ interface BlogPost {
 }
 
 const Blog = () => {
+  const { toast } = useToast();
   const GITHUB_USERNAME = "simonbromander";
   const GITHUB_REPO = "simonbromander-linktree";
   
   const { data: posts, isLoading, error } = useQuery({
     queryKey: ['blog-posts'],
     queryFn: async () => {
+      console.log('Fetching blog posts...');
       const response = await fetch(`https://api.pagescms.org/github/${GITHUB_USERNAME}/${GITHUB_REPO}/blog`);
+      console.log('Response status:', response.status);
+      
       if (!response.ok) {
-        throw new Error('Failed to fetch blog posts');
+        const errorText = await response.text();
+        console.error('API Error:', errorText);
+        throw new Error(`Failed to fetch blog posts: ${response.status} ${errorText}`);
       }
-      return response.json() as Promise<BlogPost[]>;
+      
+      const data = await response.json();
+      console.log('Fetched data:', data);
+      return data as BlogPost[];
     },
-    enabled: true,
+    retry: 1,
+    onError: (error) => {
+      console.error('Query error:', error);
+      toast({
+        title: "Error loading blog posts",
+        description: error instanceof Error ? error.message : "Failed to load blog posts",
+        variant: "destructive",
+      });
+    }
   });
 
   return (
@@ -47,14 +65,17 @@ const Blog = () => {
                 ))}
               </div>
             ) : error ? (
-              <div className="text-neutral-600 dark:text-neutral-400">
-                <p>This blog uses PagesCMS.org with GitHub for content management. To get started:</p>
-                <ol className="list-decimal list-inside mt-4 space-y-2">
-                  <li>Visit PagesCMS.org and connect your GitHub repository</li>
-                  <li>Create a new blog collection</li>
-                  <li>Add your first blog post through the CMS interface</li>
-                  <li>Update the fetch URL in this component with your repository details</li>
+              <div className="text-red-600 dark:text-red-400 space-y-4">
+                <p>Error loading blog posts. Please check:</p>
+                <ol className="list-decimal list-inside space-y-2">
+                  <li>Your GitHub repository is connected to PagesCMS.org</li>
+                  <li>The blog collection is properly configured in .pages.yml</li>
+                  <li>You have at least one blog post in your repository</li>
+                  <li>Your repository name and username are correct ({GITHUB_USERNAME}/{GITHUB_REPO})</li>
                 </ol>
+                <p className="mt-4 text-sm">
+                  If the issue persists, check the browser console for more details.
+                </p>
               </div>
             ) : posts?.length ? (
               <div className="space-y-8">
