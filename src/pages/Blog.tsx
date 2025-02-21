@@ -21,18 +21,33 @@ const Blog = () => {
     queryKey: ['blog-posts'],
     queryFn: async () => {
       console.log('Fetching blog posts...');
-      const response = await fetch(`https://api.pagescms.org/github/${GITHUB_USERNAME}/${GITHUB_REPO}/blog`);
-      console.log('Response status:', response.status);
+      const apiUrl = `https://api.pagescms.org/github/${GITHUB_USERNAME}/${GITHUB_REPO}/blog`;
+      console.log('API URL:', apiUrl);
       
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('API Error:', errorText);
-        throw new Error(`Failed to fetch blog posts: ${response.status} ${errorText}`);
+      try {
+        const response = await fetch(apiUrl);
+        console.log('Response status:', response.status);
+        console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('API Error Response:', errorText);
+          throw new Error(`Failed to fetch blog posts: ${response.status} ${errorText}`);
+        }
+        
+        const data = await response.json();
+        console.log('Fetched data:', data);
+        
+        if (!Array.isArray(data)) {
+          console.error('Unexpected response format:', data);
+          throw new Error('Invalid response format from API');
+        }
+        
+        return data as BlogPost[];
+      } catch (err) {
+        console.error('Fetch error:', err);
+        throw err;
       }
-      
-      const data = await response.json();
-      console.log('Fetched data:', data);
-      return data as BlogPost[];
     },
     retry: 1,
     meta: {
@@ -40,7 +55,7 @@ const Blog = () => {
         console.error('Query error:', error);
         toast({
           title: "Error loading blog posts",
-          description: error.message || "Failed to load blog posts",
+          description: error.message || "Failed to load blog posts. Please ensure your repository is connected to PagesCMS.org",
           variant: "destructive",
         });
       }
