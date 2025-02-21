@@ -34,13 +34,15 @@ const Blog = () => {
       return data as BlogPost[];
     },
     retry: 1,
-    onError: (error) => {
-      console.error('Query error:', error);
-      toast({
-        title: "Error loading blog posts",
-        description: error instanceof Error ? error.message : "Failed to load blog posts",
-        variant: "destructive",
-      });
+    meta: {
+      onError: (error: Error) => {
+        console.error('Query error:', error);
+        toast({
+          title: "Error loading blog posts",
+          description: error.message || "Failed to load blog posts",
+          variant: "destructive",
+        });
+      }
     }
   });
 
