@@ -40,3 +40,4 @@ content:
         label: Content
         type: rich-text
         required: true
+
