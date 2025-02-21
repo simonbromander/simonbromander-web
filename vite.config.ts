@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' &&
     componentTagger(),
     Markdown({
-      mode: ['html', 'toc', 'yaml'],
+      mode: 'html',
     }),
   ].filter(Boolean),
   resolve: {
