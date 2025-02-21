@@ -11,9 +11,8 @@ interface BlogPost {
 }
 
 const Blog = () => {
-  // Replace these values with your GitHub username and repository name
-  const GITHUB_USERNAME = "YOUR_USERNAME";
-  const GITHUB_REPO = "YOUR_REPO_NAME";
+  const GITHUB_USERNAME = "simonbromander";
+  const GITHUB_REPO = "simonbromander-linktree";
   
   const { data: posts, isLoading, error } = useQuery({
     queryKey: ['blog-posts'],
