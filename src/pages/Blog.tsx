@@ -12,6 +12,14 @@ interface BlogPost {
   slug: string;
 }
 
+interface MarkdownAttributes {
+  title: string;
+  description: string;
+  date: string;
+  slug: string;
+  content: string;
+}
+
 const Blog = () => {
   const { toast } = useToast();
   
@@ -22,7 +30,7 @@ const Blog = () => {
       
       try {
         // Since we're using Vite, we can use the import.meta.glob feature to load markdown files
-        const postFiles = import.meta.glob('/content/blog/*.md', { eager: true });
+        const postFiles = import.meta.glob<{ attributes: MarkdownAttributes }>('/content/blog/*.md', { eager: true });
         console.log('Found post files:', Object.keys(postFiles));
         
         if (Object.keys(postFiles).length === 0) {
@@ -30,13 +38,18 @@ const Blog = () => {
           return [];
         }
         
-        const blogPosts: BlogPost[] = Object.entries(postFiles).map(([path, module]: [string, any]) => {
+        const blogPosts: BlogPost[] = Object.entries(postFiles).map(([path, module]) => {
           console.log('Processing post:', path);
           console.log('Module content:', module);
           
-          // Extract metadata from the markdown frontmatter
-          const { title, description, date, slug } = module.default;
-          return { title, description, date, slug };
+          // Extract metadata from the markdown attributes
+          const { attributes } = module;
+          return {
+            title: attributes.title,
+            description: attributes.description,
+            date: attributes.date,
+            slug: attributes.slug
+          };
         });
         
         // Sort posts by date (most recent first)
