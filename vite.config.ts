@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
     componentTagger(),
     {
       ...Markdown(),
-      enforce: 'pre'
+      enforce: 'pre' as const
     },
   ].filter(Boolean),
   resolve: {
