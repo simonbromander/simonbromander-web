@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
     componentTagger(),
     {
       ...Markdown({
-        mode: 'html',
+        mode: ['html'],
         markdownIt: {
           html: true,
           linkify: true,
