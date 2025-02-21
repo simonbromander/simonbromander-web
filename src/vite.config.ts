@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     {
       ...Markdown({
-        mode: "html",
+        mode: ['html'],
         markdownIt: {
           html: true,
           linkify: true,
