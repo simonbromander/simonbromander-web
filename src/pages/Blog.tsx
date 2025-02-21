@@ -11,17 +11,19 @@ interface BlogPost {
 }
 
 const Blog = () => {
-  // Replace YOUR_USERNAME and YOUR_REPO_NAME with your actual GitHub details
+  // Replace these values with your GitHub username and repository name
+  const GITHUB_USERNAME = "YOUR_USERNAME";
+  const GITHUB_REPO = "YOUR_REPO_NAME";
+  
   const { data: posts, isLoading, error } = useQuery({
     queryKey: ['blog-posts'],
     queryFn: async () => {
-      const response = await fetch('https://api.pagescms.org/github/YOUR_USERNAME/YOUR_REPO_NAME/blog');
+      const response = await fetch(`https://api.pagescms.org/github/${GITHUB_USERNAME}/${GITHUB_REPO}/blog`);
       if (!response.ok) {
         throw new Error('Failed to fetch blog posts');
       }
       return response.json() as Promise<BlogPost[]>;
     },
-    // Enable the query since we're now using real repository details
     enabled: true,
   });
 
