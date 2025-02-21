@@ -16,7 +16,14 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' &&
     componentTagger(),
     {
-      ...Markdown(),
+      ...Markdown({
+        mode: 'html',
+        markdownIt: {
+          html: true,
+          linkify: true,
+          typographer: true,
+        },
+      }),
       enforce: 'pre' as const
     },
   ].filter(Boolean),
