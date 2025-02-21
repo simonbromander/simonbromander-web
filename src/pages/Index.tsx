@@ -49,7 +49,7 @@ const Index = () => {
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2" />
       
-      <div className="max-w-4xl mx-auto relative mt-16">
+      <div className="max-w-4xl mx-auto relative">
         <div className="md:flex md:gap-12">
           <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 self-start">
             <div className="space-y-4">
