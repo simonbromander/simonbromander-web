@@ -49,8 +49,11 @@ const Index = () => {
                 <h1 className="text-3xl font-bold text-neutral-800 dark:text-neutral-100">
                   Simon Bromander
                 </h1>
-                <p className="text-lg text-neutral-600 dark:text-neutral-400 mt-1">
-                  Product & UX Lead
+                <p className="text-lg text-neutral-600 dark:text-neutral-400 mt-1 flex items-center gap-2 justify-center md:justify-start">
+                  <span>Product & Design</span>
+                  <a href="https://fintower.ai" target="_blank" rel="noopener noreferrer" className="inline-block px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
+                    @fintower.ai
+                  </a>
                 </p>
               </div>
               <div className="space-y-2">
@@ -63,7 +66,6 @@ const Index = () => {
                     Open for advisory & coaching
                   </div>
                 </a>
-                <a href="https://fintower.ai" target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">Product & Design at fintower.ai</a>
               </div>
             </div>
           </div>
