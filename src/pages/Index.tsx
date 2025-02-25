@@ -1,7 +1,9 @@
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AtSign, BookOpen, Linkedin, Mail, CheckCircle2, Calendar, Link2, Users, Camera } from "lucide-react";
+
 const Index = () => {
   const achievements = ["10+ years in UX & Product", "From startups to enterprises", "Now helping startups make smarter design decisions & build better products"];
   const socialLinks = [{
@@ -30,6 +32,7 @@ const Index = () => {
     label: "Photography Portfolio",
     bgColor: "bg-neutral-100/80 dark:bg-neutral-800/80"
   }];
+
   return <div className="min-h-screen w-full bg-gradient-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 py-12 px-4 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2" />
@@ -51,15 +54,15 @@ const Index = () => {
                 </p>
               </div>
               <div className="space-y-2">
-                <div className="flex items-center justify-center md:justify-start gap-2">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                  </span>
-                  <a href="#" className="inline-block px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">
+                <a href="#" className="inline-block px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
                     Open for advisory & coaching
-                  </a>
-                </div>
+                  </div>
+                </a>
                 <a href="https://fintower.ai" target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">Product & Design at fintower.ai</a>
               </div>
             </div>
@@ -123,4 +126,5 @@ const Index = () => {
       </div>
     </div>;
 };
+
 export default Index;
