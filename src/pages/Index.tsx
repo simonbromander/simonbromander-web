@@ -1,7 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AtSign, BookOpen, Linkedin, Mail, CheckCircle2, Calendar, Link2, Users, Camera } from "lucide-react";
+import { AtSign, BookOpen, Linkedin, Mail, CheckCircle2, Calendar, Link2, Users, Camera, ExternalLink } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 const Index = () => {
   const achievements = ["10+ years in UX & Product", "From startups to enterprises", "Now helping startups make smarter design decisions & build better products"];
   const socialLinks = [{
@@ -34,6 +35,10 @@ const Index = () => {
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2" />
       
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+
       <div className="max-w-4xl mx-auto relative">
         <div className="md:flex md:gap-12">
           <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 self-start">
@@ -46,9 +51,18 @@ const Index = () => {
                 <h1 className="text-3xl font-bold text-neutral-800 dark:text-neutral-100">
                   Simon Bromander
                 </h1>
-                <p className="text-lg text-neutral-600 dark:text-neutral-400 mt-1 flex items-center gap-2 justify-center md:justify-start">
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 flex items-center gap-2 justify-center md:justify-start">
                   <span>Product & Design at</span>
-                  <a href="https://fintower.ai" target="_blank" rel="noopener noreferrer" className="inline-block px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">fintower.ai</a>
+                  <Button asChild variant="ghost" className="group px-0">
+                    <a
+                      href="https://fintower.ai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-gradient-to-r from-purple-500 to-emerald-600 bg-clip-text text-transparent font-semibold hover:opacity-80 transition-opacity"
+                    >
+                      fintower.ai
+                    </a>
+                  </Button>
                 </p>
               </div>
               <div className="space-y-2">
