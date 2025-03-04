@@ -49,16 +49,49 @@ function parseFrontmatter(content: string): { frontmatter: Record<string, any>; 
   return { frontmatter, markdownContent };
 }
 
-export async function getAllPosts(): Promise<BlogPost[]> {
+// Fetch the file index (a dynamically generated list of blog posts)
+async function getFileIndex(): Promise<string[]> {
   try {
-    // In a production environment, you would use a better approach to get all files
-    // For GitHub Pages builds, you could generate a list of files during build time
+    // For GitHub Pages, we'll use an index.json file that gets generated at build time
+    // Create this file if it doesn't exist
+    try {
+      const response = await fetch('/content/blog-index.json');
+      if (response.ok) {
+        const data = await response.json();
+        return data.files || [];
+      }
+    } catch (e) {
+      console.log('No blog index found, trying directory listing fallback');
+    }
     
-    // For now, we'll explicitly list the files we know exist
-    const fileNames = [
+    // Fallback 1: Try to fetch the content/blog directory and parse it
+    try {
+      const response = await fetch('/content/blog/');
+      if (response.ok) {
+        const html = await response.text();
+        // Parse the HTML to extract filenames
+        const matches = html.match(/href="([^"]+\.md)"/g) || [];
+        return matches.map(match => match.replace(/href="(.+)"/, '$1'));
+      }
+    } catch (e) {
+      console.log('Directory listing failed, using hardcoded fallback');
+    }
+    
+    // Fallback 2: Use hardcoded files we know exist
+    return [
       '2024-03-04-getting-started-with-react.md',
       '2025-03-04-test.md'
     ];
+  } catch (error) {
+    console.error('Error getting file index:', error);
+    return [];
+  }
+}
+
+export async function getAllPosts(): Promise<BlogPost[]> {
+  try {
+    // Get the list of blog post files
+    const fileNames = await getFileIndex();
     
     const posts = await Promise.all(
       fileNames.map(async (fileName) => {
