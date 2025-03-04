@@ -8,36 +8,33 @@ media:
   input: public/images
   output: /images
 
-collections:
+content:
   - name: blog
     label: Blog Posts
+    type: collection
     path: content/blog
-    extension: md
-    format: md-frontmatter
     view:
       fields: [title, date, author]
-    schema:
-      path: "{{year}}-{{month}}-{{day}}-{{slug}}"
-      fields:
-        - name: title
-          label: Title
-          type: string
-          required: true
-        - name: date
-          label: Publish Date
-          type: datetime
-          required: true
-        - name: author
-          label: Author
-          type: string
-          default: Simon Bromander
-        - name: thumbnail
-          label: Featured Image
-          type: image
-          required: false
-        - name: excerpt
-          label: Excerpt
-          type: text
-        - name: body
-          label: Content
-          type: markdown 
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Publish Date
+        type: date
+        required: true
+      - name: author
+        label: Author
+        type: string
+        default: Simon Bromander
+      - name: thumbnail
+        label: Featured Image
+        type: image
+        required: false
+      - name: excerpt
+        label: Excerpt
+        type: text
+      - name: body
+        label: Content
+        type: rich-text 
