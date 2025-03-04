@@ -58,7 +58,7 @@ export function Layout({ children }: LayoutProps) {
 
       <div className="max-w-4xl mx-auto relative">
         <div className="md:flex md:gap-12">
-          <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 self-start">
+          <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 h-fit">
             <div className="space-y-6">
               <Avatar className="w-32 h-32 mx-auto md:mx-0 border-4 border-white/80 dark:border-neutral-800/80 shadow-lg backdrop-blur-sm">
                 <AvatarImage src="lovable-uploads/1630ba4e-617c-4ba9-beac-f977a3cd5ccd.png" />
@@ -149,7 +149,7 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
 
-          <div className="flex-grow space-y-8 mt-8 md:mt-0">
+          <div className="flex-grow space-y-8 mt-8 md:mt-0 min-h-[500px]">
             {children}
           </div>
         </div>
