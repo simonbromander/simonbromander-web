@@ -11,7 +11,7 @@ media:
 collections:
   - name: blog
     label: Blog Posts
-    path: content/blog
+    path: content/blog/
     extension: md
     format: md-frontmatter
     view:
