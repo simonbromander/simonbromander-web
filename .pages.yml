@@ -1,0 +1,41 @@
+# Pages CMS Configuration
+# Docs: https://pagescms.org/docs
+
+title: Simon Bromander
+logo: public/images/logo.png  # Adjust if you have a logo in a different location
+
+media:
+  input: public/images
+  output: /images
+
+collections:
+  - name: blog
+    label: Blog Posts
+    path: content/blog
+    view:
+      fields: [title, date, author]
+    schema:
+      path: "{{year}}-{{month}}-{{day}}-{{slug}}"
+      fields:
+        - name: title
+          label: Title
+          type: string
+          required: true
+        - name: date
+          label: Publish Date
+          type: datetime
+          required: true
+        - name: author
+          label: Author
+          type: string
+          default: Simon Bromander
+        - name: thumbnail
+          label: Featured Image
+          type: image
+          required: false
+        - name: excerpt
+          label: Excerpt
+          type: text
+        - name: body
+          label: Content
+          type: markdown 
