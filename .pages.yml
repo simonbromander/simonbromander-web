@@ -12,7 +12,7 @@ content:
   - name: blog
     label: Blog Posts
     type: collection
-    path: content/blog
+    path: content/blog/
     view:
       fields: [title, date, author]
     fields:
