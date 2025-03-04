@@ -12,6 +12,8 @@ collections:
   - name: blog
     label: Blog Posts
     path: content/blog
+    extension: md
+    format: md-frontmatter
     view:
       fields: [title, date, author]
     schema:
