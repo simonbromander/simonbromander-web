@@ -9,53 +9,84 @@ export interface BlogPost {
   content: string;
 }
 
-export async function getAllPosts(): Promise<BlogPost[]> {
-  // In a real application, this would fetch from your CMS
-  // For now, we'll use the sample data
-  return [
-    {
-      id: '1',
-      title: 'Getting Started with React',
-      excerpt: 'Learn the basics of React and how to build your first component.',
-      date: '2024-03-04',
-      slug: 'getting-started-with-react',
-      author: 'Simon Bromander',
-      content: `
-        <p>React is a powerful library for building user interfaces. It was developed by Facebook and has become one of the most popular front-end frameworks in the world.</p>
-        
-        <h2>Why React?</h2>
-        <p>React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.</p>
-        
-        <h2>Key Features</h2>
-        <ul>
-          <li>Declarative</li>
-          <li>Component-Based</li>
-          <li>Learn Once, Write Anywhere</li>
-        </ul>
-      `
-    },
-    {
-      id: '2',
-      title: 'The Power of TypeScript',
-      excerpt: 'Discover how TypeScript can improve your development experience.',
-      date: '2024-03-03',
-      slug: 'power-of-typescript',
-      author: 'Simon Bromander',
-      content: `
-        <p>TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.</p>
-        
-        <h2>Benefits of TypeScript</h2>
-        <p>TypeScript adds optional static types, classes, and modules to JavaScript, making it easier to write and maintain large applications.</p>
-        
-        <h2>Key Features</h2>
-        <ul>
-          <li>Static Type Checking</li>
-          <li>Class-based Object-Oriented Programming</li>
-          <li>Enhanced IDE Support</li>
-        </ul>
-      `
+// Helper function to fetch Markdown content
+async function fetchMarkdownContent(fileName: string): Promise<string> {
+  try {
+    const response = await fetch(`/content/blog/${fileName}`);
+    if (!response.ok) {
+      console.error(`Failed to fetch ${fileName}: ${response.status} ${response.statusText}`);
+      return '';
     }
-  ];
+    return await response.text();
+  } catch (error) {
+    console.error(`Error fetching ${fileName}:`, error);
+    return '';
+  }
+}
+
+// Parse markdown frontmatter
+function parseFrontmatter(content: string): { frontmatter: Record<string, any>; markdownContent: string } {
+  const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
+  const match = content.match(frontmatterRegex);
+  
+  if (!match) {
+    return { frontmatter: {}, markdownContent: content };
+  }
+  
+  const frontmatterStr = match[1];
+  const markdownContent = content.slice(match[0].length).trim();
+  
+  // Very simple YAML parser for frontmatter
+  const frontmatter: Record<string, any> = {};
+  frontmatterStr.split('\n').forEach(line => {
+    const [key, ...valueParts] = line.split(':');
+    if (key && valueParts.length) {
+      const value = valueParts.join(':').trim();
+      frontmatter[key.trim()] = value;
+    }
+  });
+  
+  return { frontmatter, markdownContent };
+}
+
+export async function getAllPosts(): Promise<BlogPost[]> {
+  try {
+    // In a production environment, you would use a better approach to get all files
+    // For GitHub Pages builds, you could generate a list of files during build time
+    
+    // For now, we'll explicitly list the files we know exist
+    const fileNames = [
+      '2024-03-04-getting-started-with-react.md',
+      '2025-03-04-test.md'
+    ];
+    
+    const posts = await Promise.all(
+      fileNames.map(async (fileName) => {
+        const content = await fetchMarkdownContent(fileName);
+        const { frontmatter, markdownContent } = parseFrontmatter(content);
+        
+        // Extract slug from filename (remove date and extension)
+        const slug = fileName.replace(/^\d{4}-\d{2}-\d{2}-(.*)\.md$/, '$1');
+        
+        return {
+          id: slug,
+          title: frontmatter.title || 'Untitled',
+          excerpt: frontmatter.excerpt || '',
+          date: frontmatter.date || '',
+          slug,
+          author: frontmatter.author || 'Anonymous',
+          thumbnail: frontmatter.thumbnail,
+          content: markdownContent
+        };
+      })
+    );
+    
+    // Sort posts by date (newest first)
+    return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  } catch (error) {
+    console.error('Error getting all posts:', error);
+    return [];
+  }
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
