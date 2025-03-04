@@ -97,7 +97,9 @@ export default function BlogPostPage() {
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Blog
           </Button>
-          <BlogPost {...post} />
+          <div className="prose prose-neutral dark:prose-invert max-w-none">
+            <BlogPost {...post} />
+          </div>
         </div>
       </div>
     </Layout>

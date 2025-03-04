@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -94,7 +93,60 @@ export default {
         "fade-down": "fade-down 0.5s ease-out",
         "scale": "scale 0.3s ease-out",
       },
+      typography: (theme: any) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.neutral.800'),
+            a: {
+              color: theme('colors.blue.600'),
+              '&:hover': {
+                color: theme('colors.blue.700'),
+              },
+            },
+            'h1,h2,h3,h4,h5,h6': {
+              color: theme('colors.neutral.800'),
+              fontWeight: theme('fontWeight.bold'),
+            },
+            blockquote: {
+              borderLeftColor: theme('colors.neutral.200'),
+            },
+            code: {
+              color: theme('colors.neutral.700'),
+              backgroundColor: theme('colors.neutral.100'),
+              paddingLeft: theme('spacing.1'),
+              paddingRight: theme('spacing.1'),
+              paddingTop: theme('spacing.0.5'),
+              paddingBottom: theme('spacing.0.5'),
+              borderRadius: theme('borderRadius.md'),
+            },
+          },
+        },
+        dark: {
+          css: {
+            color: theme('colors.neutral.300'),
+            a: {
+              color: theme('colors.blue.400'),
+              '&:hover': {
+                color: theme('colors.blue.300'),
+              },
+            },
+            'h1,h2,h3,h4,h5,h6': {
+              color: theme('colors.neutral.100'),
+            },
+            blockquote: {
+              borderLeftColor: theme('colors.neutral.700'),
+            },
+            code: {
+              color: theme('colors.neutral.300'),
+              backgroundColor: theme('colors.neutral.800'),
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require('@tailwindcss/typography'),
+  ],
 } satisfies Config;

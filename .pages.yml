@@ -12,7 +12,7 @@ content:
   - name: blog
     label: Blog Posts
     type: collection
-    path: content/blog/
+    path: public/content/blog/
     view:
       fields: [title, date, author]
     fields:
@@ -37,4 +37,7 @@ content:
         type: text
       - name: body
         label: Content
-        type: rich-text 
+        type: rich-text
+    filename: '{{date}}-{{slug}}'
+    hooks:
+      afterChange: npm run generate-blog-index 

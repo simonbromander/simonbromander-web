@@ -7,7 +7,10 @@ export interface BlogPost {
   author: string;
   thumbnail?: string;
   content: string;
+  html: string;
 }
+
+import { marked } from 'marked';
 
 // Helper function to fetch Markdown content
 async function fetchMarkdownContent(fileName: string): Promise<string> {
@@ -79,14 +82,16 @@ async function getFileIndex(): Promise<string[]> {
     
     // Fallback 2: Use hardcoded files we know exist
     return [
-      '2024-03-04-getting-started-with-react.md',
-      '2025-03-04-test.md'
+      '2023-04-01-hello-world.md'
     ];
   } catch (error) {
     console.error('Error getting file index:', error);
     return [];
   }
 }
+
+// Configure marked options - use a simpler approach
+const renderer = new marked.Renderer();
 
 export async function getAllPosts(): Promise<BlogPost[]> {
   try {
@@ -98,24 +103,60 @@ export async function getAllPosts(): Promise<BlogPost[]> {
         const content = await fetchMarkdownContent(fileName);
         const { frontmatter, markdownContent } = parseFrontmatter(content);
         
+        // Parse markdown to HTML - using default options
+        const html = marked.parse(markdownContent, {
+          renderer: renderer
+        }) as string;
+        
         // Extract slug from filename (remove date and extension)
         const slug = fileName.replace(/^\d{4}-\d{2}-\d{2}-(.*)\.md$/, '$1');
+        
+        // Safely parse the date
+        let formattedDate = '';
+        try {
+          if (frontmatter.date) {
+            const date = new Date(frontmatter.date);
+            if (!isNaN(date.getTime())) {
+              formattedDate = date.toISOString().split('T')[0]; // YYYY-MM-DD format
+            }
+          }
+        } catch (e) {
+          console.error('Error parsing date:', e);
+        }
         
         return {
           id: slug,
           title: frontmatter.title || 'Untitled',
           excerpt: frontmatter.excerpt || '',
-          date: frontmatter.date || '',
+          date: formattedDate || 'Unknown date',
           slug,
           author: frontmatter.author || 'Anonymous',
           thumbnail: frontmatter.thumbnail,
-          content: markdownContent
+          content: markdownContent,
+          html
         };
       })
     );
     
     // Sort posts by date (newest first)
-    return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    // Use a safer sorting method
+    return posts.sort((a, b) => {
+      try {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        
+        // Check if both dates are valid
+        if (!isNaN(dateA.getTime()) && !isNaN(dateB.getTime())) {
+          return dateB.getTime() - dateA.getTime();
+        }
+        
+        // Fall back to string comparison if dates are invalid
+        return b.date.localeCompare(a.date);
+      } catch (e) {
+        console.error('Error sorting posts by date:', e);
+        return 0;
+      }
+    });
   } catch (error) {
     console.error('Error getting all posts:', error);
     return [];

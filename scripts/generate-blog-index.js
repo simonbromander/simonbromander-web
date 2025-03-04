@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Path to blog posts directory
-const BLOG_DIR = path.join(__dirname, '../content/blog');
+const BLOG_DIR = path.join(__dirname, '../public/content/blog');
 // Output path for the index file
 const INDEX_FILE = path.join(__dirname, '../public/content/blog-index.json');
 
