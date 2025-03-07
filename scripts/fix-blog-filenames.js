@@ -1,6 +1,6 @@
 /**
  * This script fixes malformed blog post filenames
- * It finds files with template variables in the name and renames them to a proper format
+ * It finds files with template variables in the name or generic filenames like post.md and renames them to a proper format
  */
 
 import fs from 'node:fs';
@@ -13,6 +13,9 @@ const __dirname = path.dirname(__filename);
 
 // Path to blog posts directory
 const BLOG_DIR = path.join(__dirname, '../public/content/blog');
+
+// Pattern for generic filenames like post.md or post-1.md
+const GENERIC_FILE_PATTERN = /^post(?:-\d+)?\.md$/;
 
 // Function to parse frontmatter from a file
 function parseFrontmatter(content) {
@@ -51,8 +54,8 @@ try {
   
   // Loop through each file
   for (const filename of files) {
-    // Check if the filename has template variables
-    if (filename.includes('{{') && filename.includes('}}')) {
+    // Check if the filename has template variables or is a generic filename
+    if (filename.includes('{{') || filename.includes('}}') || GENERIC_FILE_PATTERN.test(filename)) {
       console.log(`Found problematic file: ${filename}`);
       
       // Read the file contents
@@ -62,7 +65,10 @@ try {
       
       // Generate a new filename
       let newFilename = '';
-      if (frontmatter.date && frontmatter.title) {
+      if (frontmatter.date && frontmatter.slug) {
+        // Use the slug field directly if available
+        newFilename = `${frontmatter.date}-${frontmatter.slug}.md`;
+      } else if (frontmatter.date && frontmatter.title) {
         // Format: YYYY-MM-DD-title-slug.md
         const title = frontmatter.title
           .toLowerCase()
@@ -78,7 +84,16 @@ try {
       
       // Rename the file
       const newPath = path.join(BLOG_DIR, newFilename);
-      fs.renameSync(filePath, newPath);
+      
+      // Check if the target file already exists
+      if (fs.existsSync(newPath)) {
+        console.log(`Target file already exists: ${newFilename}`);
+        newFilename = `${frontmatter.date}-${frontmatter.slug || 'post'}-${Date.now()}.md`;
+        console.log(`Using alternate name: ${newFilename}`);
+      }
+      
+      const finalPath = path.join(BLOG_DIR, newFilename);
+      fs.renameSync(filePath, finalPath);
       console.log(`Renamed to: ${newFilename}`);
       fixedCount++;
     }

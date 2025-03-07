@@ -116,10 +116,9 @@ export async function getAllPosts(): Promise<BlogPost[]> {
         if (frontmatter.slug) {
           slug = frontmatter.slug;
         }
-        // Handle template files and other cases if no slug in frontmatter
-        else if (fileName.includes('{{') && fileName.includes('}}')) {
-          // Handle case where filename is a template (from PagesCMS)
-          // Just use the title with lowercase and hyphens
+        // Handle generic 'post.md' filenames and templates
+        else if (fileName === 'post.md' || fileName.match(/^post-\d+\.md$/) || fileName.includes('{{')) {
+          // For generic filenames, use the title to generate a slug
           slug = frontmatter.title 
             ? frontmatter.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
             : 'post';
