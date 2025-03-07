@@ -111,10 +111,12 @@ export async function getAllPosts(): Promise<BlogPost[]> {
         // Extract slug from filename (remove date and extension)
         // Handle both normal date-slug format and template literals
         let slug = '';
-        if (fileName === '{{yyyy}}-{{MM}}-{{dd}}-{{slug}}.md') {
+        if (fileName === '{{date}}-{{slug}}.md') {
           // Special case for this specific template file
-          slug = 'micro-apps-comeback';
-        } else if (fileName.startsWith('{{') && fileName.includes('}}')) {
+          slug = frontmatter.title 
+            ? frontmatter.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+            : 'post';
+        } else if (fileName.includes('{{') && fileName.includes('}}')) {
           // Handle case where filename is a template (from PagesCMS)
           // Just use the title with lowercase and hyphens
           slug = frontmatter.title 

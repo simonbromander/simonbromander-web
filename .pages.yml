@@ -23,6 +23,7 @@ content:
       - name: date
         label: Publish Date
         type: date
+        format: YYYY-MM-DD  # Specify date format
         required: true
       - name: author
         label: Author
@@ -38,6 +39,6 @@ content:
       - name: body
         label: Content
         type: rich-text
-    filename: '{{yyyy}}-{{MM}}-{{dd}}-{{slug}}.md'
+    filename: '{{date}}-{{slug}}.md'  # Use the date field directly
     hooks:
       afterChange: npm run generate-blog-index 
