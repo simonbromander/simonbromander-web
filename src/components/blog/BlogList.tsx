@@ -16,6 +16,25 @@ interface BlogListProps {
 }
 
 export function BlogList({ posts }: BlogListProps) {
+  // Helper function to ensure the slug is clean (no template variables or paths)
+  const cleanSlug = (dirtySlug: string): string => {
+    // If it's a full path, extract just the filename
+    if (dirtySlug.includes('/')) {
+      dirtySlug = dirtySlug.split('/').pop() || dirtySlug;
+    }
+    // Remove .md extension if present
+    dirtySlug = dirtySlug.replace(/\.md$/, '');
+    // If it's just 'post', use a random string
+    if (dirtySlug === 'post') {
+      return 'post-' + Math.random().toString(36).substring(2, 10);
+    }
+    // If it contains template variables, use a random string
+    if (dirtySlug.includes('{{') || dirtySlug.includes('}}')) {
+      return 'post-' + Math.random().toString(36).substring(2, 10);
+    }
+    return dirtySlug;
+  };
+
   return (
     <div className="grid gap-6 md:grid-cols-2">
       {posts.map((post) => (
@@ -34,7 +53,7 @@ export function BlogList({ posts }: BlogListProps) {
             <p className="text-neutral-600 dark:text-neutral-400">{post.excerpt}</p>
             <div className="mt-4">
               <a
-                href={`#/blog/${post.slug}`}
+                href={`#/blog/${cleanSlug(post.slug)}`}
                 className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
               >
                 Read more →

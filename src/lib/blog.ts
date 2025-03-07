@@ -112,9 +112,26 @@ export async function getAllPosts(): Promise<BlogPost[]> {
         // Handle both normal date-slug format and template literals
         let slug = '';
         
+        // Clean up a slug that might be a full path
+        const cleanupSlug = (dirtySlug: string): string => {
+          // If it's a full path, extract just the filename
+          if (dirtySlug.includes('/')) {
+            dirtySlug = dirtySlug.split('/').pop() || dirtySlug;
+          }
+          // Remove .md extension if present
+          dirtySlug = dirtySlug.replace(/\.md$/, '');
+          // If it's just 'post', use the title instead
+          if (dirtySlug === 'post') {
+            return frontmatter.title
+              ? frontmatter.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+              : 'untitled-post';
+          }
+          return dirtySlug;
+        };
+
         // If frontmatter has a slug field, use that as the highest priority
         if (frontmatter.slug) {
-          slug = frontmatter.slug;
+          slug = cleanupSlug(frontmatter.slug);
         }
         // Handle generic 'post.md' filenames and templates
         else if (fileName === 'post.md' || fileName.match(/^post-\d+\.md$/) || fileName.includes('{{')) {
@@ -124,7 +141,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
             : 'post';
         } else {
           // Normal case - extract slug from filename
-          slug = fileName.replace(/^\d{4}-\d{2}-\d{2}-(.*)\.md$/, '$1');
+          slug = cleanupSlug(fileName);
         }
         
         // Safely parse the date
@@ -181,5 +198,40 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   const posts = await getAllPosts();
-  return posts.find(post => post.slug === slug) || null;
+  
+  // Clean up the requested slug
+  const cleanSlug = (dirtySlug: string): string => {
+    // If it's a full path, extract just the filename
+    if (dirtySlug.includes('/')) {
+      dirtySlug = dirtySlug.split('/').pop() || dirtySlug;
+    }
+    // Remove .md extension if present
+    dirtySlug = dirtySlug.replace(/\.md$/, '');
+    return dirtySlug;
+  };
+
+  const requestedSlug = cleanSlug(slug);
+  
+  // First, try to find a post with an exact slug match (after cleaning)
+  let post = posts.find(post => cleanSlug(post.slug) === requestedSlug);
+  
+  // If not found and the requested slug might be a cleaned version of a problematic slug,
+  // try to find the post by comparing the cleaned version of slugs
+  if (!post && posts.length > 0) {
+    // First try by title
+    post = posts.find(post => {
+      const titleSlug = post.title
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+      return titleSlug === requestedSlug;
+    });
+    
+    // If still not found, look for any post that contains template variables in slug
+    if (!post) {
+      post = posts.find(post => post.slug.includes('{{') || post.slug.includes('}}'));
+    }
+  }
+  
+  return post || null;
 } 
