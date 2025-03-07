@@ -123,7 +123,7 @@ export default {
         },
         dark: {
           css: {
-            color: theme('colors.neutral.300'),
+            color: theme('colors.neutral.200'),
             a: {
               color: theme('colors.blue.400'),
               '&:hover': {
@@ -131,14 +131,41 @@ export default {
               },
             },
             'h1,h2,h3,h4,h5,h6': {
-              color: theme('colors.neutral.100'),
+              color: theme('colors.white'),
+              fontWeight: theme('fontWeight.bold'),
+            },
+            h1: {
+              color: theme('colors.white'),
+            },
+            h2: {
+              color: theme('colors.white'),
+            },
+            h3: {
+              color: theme('colors.white'),
             },
             blockquote: {
               borderLeftColor: theme('colors.neutral.700'),
             },
             code: {
-              color: theme('colors.neutral.300'),
+              color: theme('colors.neutral.200'),
               backgroundColor: theme('colors.neutral.800'),
+            },
+            strong: {
+              color: theme('colors.neutral.100'),
+            },
+            ul: {
+              li: {
+                '&::before': {
+                  backgroundColor: theme('colors.neutral.400'),
+                }
+              }
+            },
+            ol: {
+              li: {
+                '&::marker': {
+                  color: theme('colors.neutral.400'),
+                }
+              }
             },
           },
         },
