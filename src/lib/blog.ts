@@ -109,7 +109,21 @@ export async function getAllPosts(): Promise<BlogPost[]> {
         }) as string;
         
         // Extract slug from filename (remove date and extension)
-        const slug = fileName.replace(/^\d{4}-\d{2}-\d{2}-(.*)\.md$/, '$1');
+        // Handle both normal date-slug format and template literals
+        let slug = '';
+        if (fileName === '{{yyyy}}-{{MM}}-{{dd}}-{{slug}}.md') {
+          // Special case for this specific template file
+          slug = 'micro-apps-comeback';
+        } else if (fileName.startsWith('{{') && fileName.includes('}}')) {
+          // Handle case where filename is a template (from PagesCMS)
+          // Just use the title with lowercase and hyphens
+          slug = frontmatter.title 
+            ? frontmatter.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+            : 'post';
+        } else {
+          // Normal case - extract slug from filename
+          slug = fileName.replace(/^\d{4}-\d{2}-\d{2}-(.*)\.md$/, '$1');
+        }
         
         // Safely parse the date
         let formattedDate = '';
