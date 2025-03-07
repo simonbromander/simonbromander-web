@@ -38,6 +38,6 @@ content:
       - name: body
         label: Content
         type: rich-text
-    filename: '{{date}}-{{slug}}'
+    filename: '{{yyyy}}-{{MM}}-{{dd}}-{{slug}}.md'
     hooks:
       afterChange: npm run generate-blog-index 
