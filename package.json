@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "generate-blog-index": "node scripts/generate-blog-index.js",
-    "setup-blog": "node scripts/setup-blog-dirs.js"
+    "setup-blog": "node scripts/setup-blog-dirs.js",
+    "fix-blog-filenames": "node scripts/fix-blog-filenames.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
