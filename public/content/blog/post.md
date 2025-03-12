@@ -3,6 +3,7 @@ title: A new chapter
 slug: a-new-chapter
 date: 2024-09-01
 author: Simon Bromander
+excerpt: How did I end up here?
 ---
 How did I end up here? Today marks the beginning of a new chapter for me as the Product Design & Strategy Lead at a fintech startup. It’s an exciting shift, and with it, I’ve decided to move my writing to my personal website.
 
