@@ -7,7 +7,7 @@ thumbnail: /images/734_1x_shots_so.png
 excerpt: If you've seen the "vibe coding" trend lately, I'm taking it a step
   further with "Vibe Prototyping" - and it's completely transformed my workflow.
 ---
-My prototyping process has gone from 8+ hours in Figma to 45 minutes with Cursor. The ROI is undeniable.
+My prototyping process has gone from 8+ hours in Figma to 45 minutes with Lovable and Cursor. The ROI is undeniable.
 
 If you're working in tech, you've likely noticed the "vibe coding" trend sweeping through lately. For most of us (myself included), it means building scrappy, single-purpose apps that solve specific problems without necessarily being production-ready.
 
