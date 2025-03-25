@@ -15,15 +15,40 @@ import { marked } from 'marked';
 // Helper function to fetch Markdown content
 async function fetchMarkdownContent(fileName: string): Promise<string> {
   try {
+    console.log(`Attempting to fetch blog post: ${fileName} from /content/blog/${fileName}`);
     const response = await fetch(`/content/blog/${fileName}`);
     if (!response.ok) {
       console.error(`Failed to fetch ${fileName}: ${response.status} ${response.statusText}`);
-      return '';
+      return `---
+title: Error Loading Post
+date: 2025-03-25
+excerpt: There was an error loading this post.
+---
+
+# Error Loading Post
+
+There was an error loading the post content: ${fileName}
+Status: ${response.status} ${response.statusText}
+
+Please check the console for more details.`;
     }
-    return await response.text();
+    const content = await response.text();
+    console.log(`Successfully fetched ${fileName}, content length: ${content.length}`);
+    return content;
   } catch (error) {
     console.error(`Error fetching ${fileName}:`, error);
-    return '';
+    return `---
+title: Error Loading Post
+date: 2025-03-25
+excerpt: There was an error loading this post.
+---
+
+# Error Loading Post
+
+There was an error fetching the post content: ${fileName}
+Error: ${error instanceof Error ? error.message : String(error)}
+
+Please check the console for more details.`;
   }
 }
 
