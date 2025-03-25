@@ -9,9 +9,10 @@ interface BlogPostProps {
   html?: string;
   date: string;
   author?: string;
+  thumbnail?: string;
 }
 
-export function BlogPost({ title, content, html, date, author }: BlogPostProps) {
+export function BlogPost({ title, content, html, date, author, thumbnail }: BlogPostProps) {
   // Safely format the date
   const formatDate = (dateString: string) => {
     try {
@@ -29,6 +30,15 @@ export function BlogPost({ title, content, html, date, author }: BlogPostProps) 
   return (
     <article className="prose prose-lg dark:prose-invert max-w-none">
       <header className="mb-8">
+        {thumbnail && (
+          <div className="mb-6 w-full max-h-96 overflow-hidden rounded-2xl">
+            <img 
+              src={thumbnail} 
+              alt={title} 
+              className="w-full object-cover rounded-2xl"
+            />
+          </div>
+        )}
         <h1 className="text-4xl font-bold text-neutral-800 dark:text-white mb-4">
           {title}
         </h1>

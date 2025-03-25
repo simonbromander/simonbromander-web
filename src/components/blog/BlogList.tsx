@@ -9,6 +9,7 @@ interface BlogPost {
   excerpt: string;
   date: string;
   slug: string;
+  thumbnail?: string;
 }
 
 interface BlogListProps {
@@ -39,6 +40,15 @@ export function BlogList({ posts }: BlogListProps) {
     <div className="grid gap-6 md:grid-cols-2">
       {posts.map((post) => (
         <Card key={post.id} className="hover:shadow-lg transition-shadow backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 border-white/20 dark:border-neutral-700/20">
+          {post.thumbnail && (
+            <div className="w-full h-48 overflow-hidden rounded-t-lg">
+              <img 
+                src={post.thumbnail} 
+                alt={post.title} 
+                className="w-full h-full object-cover" 
+              />
+            </div>
+          )}
           <CardHeader>
             <CardTitle className="text-xl text-neutral-800 dark:text-neutral-100">
               {post.title}

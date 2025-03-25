@@ -133,6 +133,10 @@ export async function getAllPosts(): Promise<BlogPost[]> {
           renderer: renderer
         }) as string;
         
+        // Fix image paths in the HTML and add rounded corners
+        const fixedHtml = html.replace(/<img src="(?!http|\/)(.*?)"/g, '<img src="/$1"')
+                              .replace(/<img /g, '<img class="rounded-2xl " ');
+        
         // Extract slug from filename (remove date and extension)
         // Handle both normal date-slug format and template literals
         let slug = '';
@@ -191,7 +195,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
           author: frontmatter.author || 'Anonymous',
           thumbnail: frontmatter.thumbnail,
           content: markdownContent,
-          html
+          html: fixedHtml
         };
       })
     );
