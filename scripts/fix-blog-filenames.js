@@ -65,9 +65,17 @@ try {
       
       // Generate a new filename
       let newFilename = '';
-      if (frontmatter.date && frontmatter.slug) {
-        // Use the slug field directly if available
-        newFilename = `${frontmatter.date}-${frontmatter.slug}.md`;
+      if (frontmatter.slug) {
+        // If we have a slug in the frontmatter, prioritize using it
+        const slugValue = frontmatter.slug.trim();
+        
+        if (frontmatter.date) {
+          // Format: YYYY-MM-DD-slug.md
+          const date = frontmatter.date.trim();
+          newFilename = `${date}-${slugValue}.md`;
+        } else {
+          newFilename = `${slugValue}.md`;
+        }
       } else if (frontmatter.date && frontmatter.title) {
         // Format: YYYY-MM-DD-title-slug.md
         const title = frontmatter.title
@@ -88,7 +96,12 @@ try {
       // Check if the target file already exists
       if (fs.existsSync(newPath)) {
         console.log(`Target file already exists: ${newFilename}`);
-        newFilename = `${frontmatter.date}-${frontmatter.slug || 'post'}-${Date.now()}.md`;
+        const timestamp = Date.now();
+        if (frontmatter.slug) {
+          newFilename = `${frontmatter.date || 'undated'}-${frontmatter.slug}-${timestamp}.md`;
+        } else {
+          newFilename = `fixed-post-${timestamp}.md`;
+        }
         console.log(`Using alternate name: ${newFilename}`);
       }
       

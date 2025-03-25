@@ -170,7 +170,13 @@ export async function getAllPosts(): Promise<BlogPost[]> {
             : 'post';
         } else {
           // Normal case - extract slug from filename
-          slug = cleanupSlug(fileName);
+          // Check if the filename follows the YYYY-MM-DD-slug.md pattern
+          const dateSlugMatch = fileName.match(/^\d{4}-\d{2}-\d{2}-(.+)\.md$/);
+          if (dateSlugMatch && dateSlugMatch[1]) {
+            slug = cleanupSlug(dateSlugMatch[1]);
+          } else {
+            slug = cleanupSlug(fileName);
+          }
         }
         
         // Safely parse the date

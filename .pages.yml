@@ -44,6 +44,6 @@ content:
       - name: body
         label: Content
         type: rich-text
-    filename: 'post.md'  # Fixed filename - we'll rely on our script to rename it properly
+    filename: '{{date}}-{{slug}}.md'  # Use date and slug in the filename
     hooks:
       afterChange: npm run generate-blog-index && npm run fix-blog-filenames 

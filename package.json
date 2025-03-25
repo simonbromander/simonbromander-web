@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "generate-blog-index": "node scripts/generate-blog-index.js",
     "setup-blog": "node scripts/setup-blog-dirs.js",
-    "fix-blog-filenames": "node scripts/fix-blog-filenames.js"
+    "fix-blog-filenames": "node scripts/fix-blog-filenames.js",
+    "update-all-blog-filenames": "node scripts/update-all-blog-filenames.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
