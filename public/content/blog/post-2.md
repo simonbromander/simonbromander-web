@@ -9,7 +9,7 @@ excerpt: If you've seen the "vibe coding" trend lately, I'm taking it a step
 ---
 My prototyping process has gone from 8+ hours in Figma to 45 minutes with Cursor. The ROI is undeniable.
 
-If you're working in tech, you've likely noticed the "vibe coding" trend sweeping through product teams lately. For most of us (myself included), it means building scrappy, single-purpose apps that solve specific problems without necessarily being production-ready.
+If you're working in tech, you've likely noticed the "vibe coding" trend sweeping through lately. For most of us (myself included), it means building scrappy, single-purpose apps that solve specific problems without necessarily being production-ready.
 
 However, over the past few weeks, I've found myself instinctively reaching for tools like Cursor, Lovable, and Bolt for what I'm calling "Vibe Prototyping" — and it's completely transformed my workflow.
 
