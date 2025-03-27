@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Mail } from "lucide-react";
 
 interface NewsletterSubscribeProps {
@@ -10,6 +10,7 @@ export function NewsletterSubscribe({
   title = "Subscribe to my newsletter",
   description = "Signing up is free, unsubscribe anytime."
 }: NewsletterSubscribeProps) {
+  const [email, setEmail] = useState('');
   
   useEffect(() => {
     // Load ConvertKit script
@@ -83,6 +84,35 @@ export function NewsletterSubscribe({
       document.head.removeChild(style);
     };
   }, []);
+  
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate email
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address');
+      return;
+    }
+    
+    // Submit the form data to Kit.com via fetch
+    fetch('https://app.kit.com/forms/7847447/subscriptions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `email_address=${encodeURIComponent(email)}`,
+    })
+    .then(response => {
+      // Redirect to thanks page regardless of success/failure
+      window.location.href = `${window.location.origin}/#/thanks?source=${encodeURIComponent(window.location.pathname)}&email=${encodeURIComponent(email)}`;
+    })
+    .catch(error => {
+      console.error('Error submitting form:', error);
+      // Still redirect to thanks page on error
+      window.location.href = `${window.location.origin}/#/thanks?source=${encodeURIComponent(window.location.pathname)}&email=${encodeURIComponent(email)}`;
+    });
+  };
 
   return (
     <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20 space-y-6 w-full mt-12 mb-6 max-w-full">
@@ -108,63 +138,32 @@ export function NewsletterSubscribe({
             <li>Product strategy frameworks for startups</li>
           </ul>
         </div>
-        
-       
       </div>
       
-      <form 
-        action="https://app.kit.com/forms/7847447/subscriptions" 
-        className="seva-form formkit-form" 
-        method="post" 
-        data-sv-form="7847447" 
-        data-uid="9a8fa90635" 
-        data-format="inline" 
-        data-version="5" 
-        data-options='{"settings":{"after_subscribe":{"action":"message","success_message":"Success! Now check your email to confirm your subscription.","redirect_url":""},"analytics":{"google":null,"fathom":null,"facebook":null,"segment":null,"pinterest":null,"sparkloop":null,"googletagmanager":null},"modal":{"trigger":"timer","scroll_percentage":null,"timer":5,"devices":"all","show_once_every":15},"powered_by":{"show":false,"url":"https://kit.com/features/forms?utm_campaign=poweredby&utm_content=form&utm_medium=referral&utm_source=dynamic"},"recaptcha":{"enabled":false},"return_visitor":{"action":"show","custom_content":""},"slide_in":{"display_in":"bottom_right","trigger":"timer","scroll_percentage":null,"timer":5,"devices":"all","show_once_every":15},"sticky_bar":{"display_in":"top","trigger":"timer","scroll_percentage":null,"timer":5,"devices":"all","show_once_every":15}},"version":"5"}'
-      >
-        <div data-style="clean">
-          <ul className="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
-          <label className="text-sm text-neutral-700 dark:text-neutral-300 mb-1 block hidden">Your email:</label>
-          <div data-element="fields" data-stacked="false" className="seva-fields formkit-fields">
-            <div className="formkit-field">
-              <input 
-                className="formkit-input" 
-                name="email_address" 
-                aria-label="Email Address" 
-                placeholder="Email Address" 
-                required 
-                type="email"
-              />
-            </div>
+      <form onSubmit={handleSubmit}>
+        <div className="space-y-4">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input 
+              className="flex h-10 w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300"
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
             <button 
-              data-element="submit" 
-              className="formkit-submit formkit-submit"
+              type="submit" 
+              className="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
             >
-              <div className="formkit-spinner">
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-              <span>Subscribe</span>
+              Subscribe
             </button>
           </div>
-          <div className="formkit-powered-by-convertkit-container" style={{ display: 'none' }}>
-            <a 
-              href="https://kit.com/features/forms?utm_campaign=poweredby&utm_content=form&utm_medium=referral&utm_source=dynamic" 
-              data-element="powered-by" 
-              className="formkit-powered-by-convertkit" 
-              data-variant="dark" 
-              target="_blank" 
-              rel="nofollow"
-            >
-              Built with Kit
-            </a>
-          </div>
+          
+          <p className="text-neutral-500 dark:text-neutral-500 text-xs italic">
+            No spam, unsubscribe anytime. I typically send 1-2 emails per month with high-value content only.
+          </p>
         </div>
       </form>
-      <p className="text-neutral-500 dark:text-neutral-500 text-xs italic">
-          No spam, unsubscribe anytime. I typically send 1-2 emails per month with high-value content only.
-        </p>
     </div>
   );
 } 

@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import BlogPage from "./pages/blog";
 import BlogPostPage from "./pages/blog/[slug]";
+import ThanksPage from "./pages/Thanks";
 import useAnalytics from "@/hooks/useAnalytics";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const AnalyticsRoutes = () => {
       <Route path="/" element={<Index />} />
       <Route path="blog" element={<BlogPage />} />
       <Route path="blog/:slug" element={<BlogPostPage />} />
+      <Route path="thanks" element={<ThanksPage />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>
