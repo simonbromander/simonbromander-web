@@ -88,7 +88,7 @@ export default function BlogPostPage() {
   return (
     <Layout>
       <div className="space-y-8">
-        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-900/80 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20">
+        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-900/80 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40">
           <Button 
             variant="outline" 
             size="sm" 
@@ -98,9 +98,7 @@ export default function BlogPostPage() {
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Blog
           </Button>
-          <div className="prose prose-neutral dark:prose-invert max-w-none">
-            <BlogPost {...post} />
-          </div>
+          <BlogPost {...post} />
         </div>
         
         <NewsletterSubscribe />

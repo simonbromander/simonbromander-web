@@ -115,7 +115,7 @@ export function NewsletterSubscribe({
   };
 
   return (
-    <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20 space-y-6 w-full mt-12 mb-6 max-w-full">
+    <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6 w-full mt-12 mb-6 max-w-full">
       <div className="flex items-center space-x-4">
         <div className="p-2 rounded-lg bg-blue-100/50 dark:bg-blue-900/20">
           <Mail className="w-5 h-5 text-blue-700 dark:text-blue-300" />

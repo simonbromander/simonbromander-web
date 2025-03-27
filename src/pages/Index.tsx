@@ -54,7 +54,7 @@ const Index = () => {
   return (
     <Layout>
       <div className="space-y-8">
-        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20">
+        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40">
           <h2 className="text-4xl font-bold text-neutral-800 dark:text-neutral-100 mb-8">
             From Design to Product Strategy
           </h2>
@@ -68,7 +68,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20 space-y-6">
+        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6">
           <div className="flex items-center space-x-4">
             <div className="p-2 rounded-lg bg-blue-100/50 dark:bg-blue-900/20">
               <Users className="w-5 h-5 text-blue-700 dark:text-blue-300" />

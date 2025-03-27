@@ -38,40 +38,46 @@ export function BlogList({ posts }: BlogListProps) {
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      {posts.map((post) => (
-        <Card key={post.id} className="hover:shadow-lg transition-shadow backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 border-white/20 dark:border-neutral-700/20">
-          {post.thumbnail && (
-            <div className="w-full h-48 overflow-hidden rounded-t-lg">
-              <img 
-                src={post.thumbnail} 
-                alt={post.title} 
-                className="w-full h-full object-cover" 
-              />
-            </div>
-          )}
-          <CardHeader>
-            <CardTitle className="text-xl text-neutral-800 dark:text-neutral-100">
-              {post.title}
-            </CardTitle>
-            <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
-              <time dateTime={post.date}>
-                {format(new Date(post.date), 'MMMM d, yyyy')}
-              </time>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-neutral-600 dark:text-neutral-400">{post.excerpt}</p>
-            <div className="mt-4">
-              <a
-                href={`#/blog/${cleanSlug(post.slug)}`}
-                className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
-              >
-                Read more →
-              </a>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+      {posts.map((post) => {
+        const postUrl = `#/blog/${cleanSlug(post.slug)}`;
+        return (
+          <a 
+            href={postUrl} 
+            key={post.id} 
+            className="block no-underline group"
+          >
+            <Card className="h-full hover:shadow-lg transition-shadow backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 border-neutral-200/60 dark:border-neutral-700/40">
+              {post.thumbnail && (
+                <div className="w-full h-48 overflow-hidden rounded-t-lg">
+                  <img 
+                    src={post.thumbnail} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+              )}
+              <CardHeader>
+                <CardTitle className="text-xl text-neutral-800 dark:text-neutral-100">
+                  {post.title}
+                </CardTitle>
+                <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+                  <time dateTime={post.date}>
+                    {format(new Date(post.date), 'MMMM d, yyyy')}
+                  </time>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-neutral-600 dark:text-neutral-400">{post.excerpt}</p>
+                <div className="mt-4">
+                  <span className="inline-flex items-center text-blue-600 dark:text-blue-400 group-hover:underline">
+                    Read more →
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+          </a>
+        );
+      })}
     </div>
   );
 } 
