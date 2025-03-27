@@ -5,6 +5,7 @@ import { AtSign, BookOpen, Linkedin, Mail, Camera, PenLine, Settings, Home, Exte
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link } from 'react-router-dom';
 import { Separator } from "@/components/ui/separator";
+import useAnalytics from "@/hooks/useAnalytics";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -47,6 +48,23 @@ const socialLinks = [{
 }];
 
 export function Layout({ children }: LayoutProps) {
+  const { trackEvent } = useAnalytics();
+  
+  const handleNavLinkClick = (label: string, isExternal: boolean) => {
+    trackEvent('navigation_link_click', { 
+      link: label, 
+      type: isExternal ? 'external' : 'internal' 
+    });
+  };
+  
+  const handleSocialLinkClick = (label: string) => {
+    trackEvent('social_link_click', { platform: label });
+  };
+  
+  const handleFintowerClick = () => {
+    trackEvent('company_link_click', { company: 'fintower.ai' });
+  };
+
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 py-12 px-4 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
@@ -75,6 +93,7 @@ export function Layout({ children }: LayoutProps) {
                       href="https://fintower.ai"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={handleFintowerClick}
                       className="bg-gradient-to-r from-purple-500 to-emerald-600 bg-clip-text text-transparent font-semibold hover:opacity-80 transition-opacity inline-flex items-center"
                     >
                       fintower.ai
@@ -106,6 +125,7 @@ export function Layout({ children }: LayoutProps) {
                           className="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400"
                           target="_blank" 
                           rel="noopener noreferrer"
+                          onClick={() => handleNavLinkClick(link.label, link.isExternal)}
                         >
                           <link.icon className="w-4 h-4" />
                           <span>{link.label}</span>
@@ -115,6 +135,7 @@ export function Layout({ children }: LayoutProps) {
                         <Link 
                           to={link.url} 
                           className="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400"
+                          onClick={() => handleNavLinkClick(link.label, link.isExternal)}
                         >
                           <link.icon className="w-4 h-4" />
                           <span>{link.label}</span>
@@ -136,6 +157,7 @@ export function Layout({ children }: LayoutProps) {
                         href={link.url} 
                         target="_blank" 
                         rel="noopener noreferrer" 
+                        onClick={() => handleSocialLinkClick(link.label)}
                         className="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400"
                       >
                         <link.icon className="w-4 h-4" />

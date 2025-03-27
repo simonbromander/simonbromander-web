@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button";
 import { AtSign, BookOpen, Linkedin, Mail, CheckCircle2, Calendar, Link2, Users, Camera, ExternalLink, PenLine } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Layout } from "@/components/layout/Layout";
+import useAnalytics from "@/hooks/useAnalytics";
 
 const Index = () => {
+  const { trackEvent } = useAnalytics();
+  
   const achievements = ["10+ years in UX & Product", "From startups to enterprises", "Now helping startups make smarter design decisions & build better products"];
   const socialLinks = [{
     icon: AtSign,
@@ -39,6 +42,14 @@ const Index = () => {
     bgColor: "bg-neutral-100/80 dark:bg-neutral-800/80"
   }];
 
+  const handleSocialLinkClick = (label: string) => {
+    trackEvent('social_link_click', { platform: label });
+  };
+  
+  const handleScheduleCallClick = () => {
+    trackEvent('schedule_call_click', { source: 'homepage' });
+  };
+
   return (
     <Layout>
       <div className="space-y-8">
@@ -69,12 +80,18 @@ const Index = () => {
             Interested in advisory or personal coaching? I offer free 30-minute office hours to help individuals and startups with their product and UX challenges. Let's chat!
           </p>
           <div className="flex items-center">
-            <Button asChild variant="outline" className="border-neutral-200 dark:border-neutral-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 group">
-              <a href="https://cal.com/simonbromander/office-hours-startup?date=2025-02-14&month=2025-02" target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
+            <a 
+              href="https://cal.com/simonbromander/office-hours-startup?date=2025-02-14&month=2025-02" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              onClick={handleScheduleCallClick}
+              className="inline-flex items-center"
+            >
+              <Button variant="outline" className="border-neutral-200 dark:border-neutral-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 group">
                 <Calendar className="w-4 h-4 mr-2 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-200" />
                 <span className="text-neutral-700 dark:text-neutral-300">Schedule a Call</span>
-              </a>
-            </Button>
+              </Button>
+            </a>
           </div>
         </div>
       </div>
