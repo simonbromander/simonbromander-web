@@ -5,6 +5,7 @@ import { AtSign, BookOpen, Linkedin, Mail, CheckCircle2, Calendar, Link2, Users,
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Layout } from "@/components/layout/Layout";
 import useAnalytics from "@/hooks/useAnalytics";
+import { NewsletterSubscribe } from "@/components/blog/NewsletterSubscribe";
 
 const Index = () => {
   const { trackEvent } = useAnalytics();
@@ -94,6 +95,9 @@ const Index = () => {
             </a>
           </div>
         </div>
+        
+        {/* Newsletter subscription */}
+        <NewsletterSubscribe />
       </div>
     </Layout>
   );

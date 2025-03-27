@@ -74,7 +74,7 @@ export function Layout({ children }: LayoutProps) {
         <ThemeToggle />
       </div>
 
-      <div className="max-w-4xl mx-auto relative">
+      <div className="max-w-6xl mx-auto relative">
         <div className="md:flex md:gap-12">
           <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 h-fit">
             <div className="space-y-6">

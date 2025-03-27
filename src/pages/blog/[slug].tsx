@@ -5,6 +5,7 @@ import { Layout } from '@/components/layout/Layout';
 import { getPostBySlug, BlogPost as BlogPostType } from '@/lib/blog';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { NewsletterSubscribe } from '@/components/blog/NewsletterSubscribe';
 
 export default function BlogPostPage() {
   const params = useParams();
@@ -101,6 +102,8 @@ export default function BlogPostPage() {
             <BlogPost {...post} />
           </div>
         </div>
+        
+        <NewsletterSubscribe />
       </div>
     </Layout>
   );
