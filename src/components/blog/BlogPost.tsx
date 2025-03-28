@@ -28,7 +28,7 @@ export function BlogPost({ title, content, html, date, author, thumbnail }: Blog
   };
 
   return (
-    <article className="prose prose-lg dark:prose-invert max-w-none">
+    <article className="prose prose-lg dark:prose-invert max-w-3xl">
       <header className="mb-8">
         {thumbnail && (
           <div className="mb-6 w-full max-h-96 overflow-hidden rounded-2xl">
@@ -55,7 +55,7 @@ export function BlogPost({ title, content, html, date, author, thumbnail }: Blog
         </div>
       </header>
       <div 
-        className="prose prose-lg dark:prose-invert max-w-none [&>p]:dark:text-neutral-200 [&>ul]:dark:text-neutral-200 [&>ol]:dark:text-neutral-200 [&>h1]:dark:text-white [&>h2]:dark:text-white [&>h3]:dark:text-white [&>h4]:dark:text-white"
+        className="prose prose-lg dark:prose-invert max-w-3xl [&>p]:dark:text-neutral-200 [&>ul]:dark:text-neutral-200 [&>ol]:dark:text-neutral-200 [&>h1]:dark:text-white [&>h2]:dark:text-white [&>h3]:dark:text-white [&>h4]:dark:text-white"
         dangerouslySetInnerHTML={{ __html: html || content }}
       />
     </article>

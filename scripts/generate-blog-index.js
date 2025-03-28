@@ -24,9 +24,10 @@ if (!fs.existsSync(outputDir)) {
 
 // Read the blog directory and generate the index
 try {
-  // Get all .md files in the blog directory
+  // Get all .md files in the blog directory, excluding template files
   const files = fs.readdirSync(BLOG_DIR)
-    .filter(file => file.endsWith('.md'));
+    .filter(file => file.endsWith('.md'))
+    .filter(file => !file.includes('{{') && !file.includes('}}'));
   
   // Write the index file
   const indexData = {

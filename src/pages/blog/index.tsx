@@ -31,9 +31,9 @@ export default function BlogPage() {
   return (
     <Layout>
       <div className="space-y-8">
-        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 py-8 px-0 rounded-2xl border border-white/20 dark:border-neutral-700/20">
-          <h1 className="text-4xl font-bold text-neutral-800 dark:text-neutral-100 mb-4 px-8">Blog</h1>
-          <p className="text-neutral-600 dark:text-neutral-400 px-8">
+        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20">
+          <h1 className="text-4xl font-bold text-neutral-800 dark:text-neutral-100 mb-4">Blog</h1>
+          <p className="text-neutral-600 dark:text-neutral-400">
             Thoughts on product design, development, and technology.
           </p>
         </div>
