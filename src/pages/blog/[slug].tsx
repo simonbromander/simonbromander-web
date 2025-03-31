@@ -6,6 +6,7 @@ import { getPostBySlug, BlogPost as BlogPostType } from '@/lib/blog';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, RefreshCw } from 'lucide-react';
 import { NewsletterSubscribe } from '@/components/blog/NewsletterSubscribe';
+import { BlogMetaTags } from '@/components/blog/BlogMetaTags';
 
 export default function BlogPostPage() {
   const params = useParams();
@@ -193,6 +194,7 @@ export default function BlogPostPage() {
         
         <NewsletterSubscribe />
       </div>
+      {post && <BlogMetaTags post={post} />}
     </Layout>
   );
 } 
