@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, RefreshCw } from 'lucide-react';
 import { NewsletterSubscribe } from '@/components/blog/NewsletterSubscribe';
 import { BlogMetaTags } from '@/components/blog/BlogMetaTags';
+import { setOpenGraphTags, getAbsoluteImageUrl } from '@/lib/thumbnails';
 
 export default function BlogPostPage() {
   const params = useParams();
@@ -55,6 +56,11 @@ export default function BlogPostPage() {
       }
       document.head.appendChild(metaTag);
     }
+    
+    // Add a special comment to help with server-side rendering
+    // This allows us to track which meta tags have been set by this component
+    const comment = document.createComment(`meta:${name}:dynamic`);
+    document.head.appendChild(comment);
   };
   
   // Helper function to get absolute URL
@@ -63,11 +69,11 @@ export default function BlogPostPage() {
     
     // If it's a relative URL starting with / use the origin
     if (url.startsWith('/')) {
-      return `${window.location.origin}${url}`;
+      return `https://simonbromander.com${url}`;
     }
     
     // If it's a relative URL without /, use origin + /
-    return `${window.location.origin}/${url}`;
+    return `https://simonbromander.com/${url}`;
   };
   
   // Helper function to add preload link for images
@@ -81,6 +87,7 @@ export default function BlogPostPage() {
     link.rel = 'preload';
     link.href = url;
     link.as = 'image';
+    link.setAttribute('fetchpriority', 'high');
     document.head.appendChild(link);
     console.log("Added preload link for:", url);
   };
@@ -102,21 +109,28 @@ export default function BlogPostPage() {
         if (fetchedPost) {
           console.log("Post thumbnail:", fetchedPost.thumbnail);
           
-          // Ensure thumbnail has absolute URL if it exists
-          if (fetchedPost.thumbnail && !fetchedPost.thumbnail.startsWith('http')) {
-            if (!fetchedPost.thumbnail.startsWith('/')) {
+          // Set OpenGraph tags for the post
+          if (fetchedPost.thumbnail) {
+            // Ensure thumbnail has absolute URL if it exists
+            if (!fetchedPost.thumbnail.startsWith('http') && !fetchedPost.thumbnail.startsWith('/')) {
               fetchedPost.thumbnail = `/${fetchedPost.thumbnail}`;
             }
-            console.log("Using thumbnail:", fetchedPost.thumbnail);
             
-            // Set OG image directly to ensure it's picked up by social media
-            const absoluteUrl = getAbsoluteUrl(fetchedPost.thumbnail);
-            console.log("Setting OG image directly:", absoluteUrl);
-            updateMetaTag('og:image', absoluteUrl);
-            updateMetaTag('twitter:image', absoluteUrl);
-            
-            // Add preload link for the image
-            addPreloadLink(absoluteUrl);
+            // Set OpenGraph tags with the thumbnail
+            setOpenGraphTags(
+              fetchedPost.title,
+              fetchedPost.excerpt,
+              fetchedPost.thumbnail,
+              window.location.href
+            );
+          } else {
+            // Fallback to default image
+            setOpenGraphTags(
+              fetchedPost.title,
+              fetchedPost.excerpt,
+              '/og-image.png',
+              window.location.href
+            );
           }
         }
         
