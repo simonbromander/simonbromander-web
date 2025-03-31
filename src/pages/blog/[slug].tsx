@@ -8,10 +8,12 @@ import { ArrowLeft, RefreshCw } from 'lucide-react';
 import { NewsletterSubscribe } from '@/components/blog/NewsletterSubscribe';
 import { BlogMetaTags } from '@/components/blog/BlogMetaTags';
 import { setOpenGraphTags, getAbsoluteImageUrl } from '@/lib/thumbnails';
+import useAnalytics from '@/hooks/useAnalytics';
 
 export default function BlogPostPage() {
   const params = useParams();
   const navigate = useNavigate();
+  const { trackEvent } = useAnalytics();
   const { slug } = params;
   const [post, setPost] = useState<BlogPostType | null>(null);
   const [loading, setLoading] = useState(true);
@@ -198,8 +200,24 @@ export default function BlogPostPage() {
     };
   }, [slug]);
   
+  useEffect(() => {
+    // Track blog post view
+    if (post) {
+      trackEvent('blog_post_view', {
+        title: post.title,
+        slug: post.slug,
+        date: post.date,
+        author: post.author,
+        url: window.location.pathname
+      });
+    }
+  }, [post, trackEvent]);
+
   const handleBackClick = () => {
-    navigate(-1);
+    trackEvent('blog_back_click', {
+      from: window.location.pathname
+    });
+    navigate('/#/blog');
   };
   
   const handleManualRefresh = () => {

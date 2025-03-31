@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from 'date-fns';
 import { Separator } from "@/components/ui/separator";
+import useAnalytics from '@/hooks/useAnalytics';
 
 interface BlogPost {
   id: string;
@@ -17,6 +18,8 @@ interface BlogListProps {
 }
 
 export function BlogList({ posts }: BlogListProps) {
+  const { trackEvent } = useAnalytics();
+
   // Helper function to ensure the slug is clean (no template variables or paths)
   const cleanSlug = (dirtySlug: string): string => {
     // If it's a full path, extract just the filename
@@ -36,6 +39,15 @@ export function BlogList({ posts }: BlogListProps) {
     return dirtySlug;
   };
 
+  const handlePostClick = (post: BlogPost) => {
+    trackEvent('blog_post_click', {
+      title: post.title,
+      slug: post.slug,
+      date: post.date,
+      url: `#/blog/${cleanSlug(post.slug)}`
+    });
+  };
+
   return (
     <div className="grid gap-6 md:grid-cols-2">
       {posts.map((post) => {
@@ -45,6 +57,7 @@ export function BlogList({ posts }: BlogListProps) {
             href={postUrl} 
             key={post.id} 
             className="block no-underline group"
+            onClick={() => handlePostClick(post)}
           >
             <Card className="h-full hover:shadow-lg transition-shadow backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 border-neutral-200/60 dark:border-neutral-700/40">
               {post.thumbnail && (
