@@ -12,6 +12,10 @@ export function BlogMetaTags({ post }: BlogMetaTagsProps) {
   useEffect(() => {
     if (!post) return;
 
+    // Log for debugging
+    console.log('Setting meta tags for post:', post.title);
+    console.log('Post thumbnail:', post.thumbnail);
+
     // Update basic meta tags
     document.title = `${post.title} | Simon Bromander`;
     
@@ -30,14 +34,22 @@ export function BlogMetaTags({ post }: BlogMetaTagsProps) {
     updateMetaTag('og:title', post.title);
     updateMetaTag('og:description', post.excerpt);
     updateMetaTag('og:type', 'article');
-    updateMetaTag('og:url', `https://simonbromander.com/#/blog/${post.slug}`);
+    
+    // Ensure absolute URL for og:url
+    const currentUrl = window.location.href;
+    updateMetaTag('og:url', currentUrl);
     
     // Use the post thumbnail or fallback to default og image
     if (post.thumbnail) {
-      const thumbnailUrl = post.thumbnail.startsWith('http') 
-        ? post.thumbnail 
-        : `https://simonbromander.com${post.thumbnail}`;
+      // Ensure the thumbnail URL is absolute
+      const thumbnailUrl = getAbsoluteUrl(post.thumbnail);
+      console.log('Setting OG image to:', thumbnailUrl);
       updateMetaTag('og:image', thumbnailUrl);
+    } else {
+      // Fallback to a default image with absolute URL
+      const defaultImageUrl = getAbsoluteUrl('/og-image.png');
+      console.log('No thumbnail found, using default:', defaultImageUrl);
+      updateMetaTag('og:image', defaultImageUrl);
     }
     
     // Article specific OG tags
@@ -51,10 +63,11 @@ export function BlogMetaTags({ post }: BlogMetaTagsProps) {
     
     // Same for Twitter image as OG image
     if (post.thumbnail) {
-      const thumbnailUrl = post.thumbnail.startsWith('http') 
-        ? post.thumbnail 
-        : `https://simonbromander.com${post.thumbnail}`;
+      const thumbnailUrl = getAbsoluteUrl(post.thumbnail);
       updateMetaTag('twitter:image', thumbnailUrl);
+    } else {
+      const defaultImageUrl = getAbsoluteUrl('/og-image.png');
+      updateMetaTag('twitter:image', defaultImageUrl);
     }
     
     // Cleanup function to restore original meta tags when unmounting
@@ -66,17 +79,30 @@ export function BlogMetaTags({ post }: BlogMetaTagsProps) {
       updateMetaTag('og:description', 'Product Design & Strategy Lead focusing on innovative design tools and processes');
       updateMetaTag('og:type', 'website');
       updateMetaTag('og:url', 'https://simonbromander.com');
-      updateMetaTag('og:image', '/og-image.png');
+      updateMetaTag('og:image', getAbsoluteUrl('/og-image.png'));
       updateMetaTag('twitter:card', 'summary_large_image');
       updateMetaTag('twitter:title', 'Simon Bromander');
       updateMetaTag('twitter:description', 'Product Design & Strategy Lead focusing on innovative design tools and processes');
-      updateMetaTag('twitter:image', '/og-image.png');
+      updateMetaTag('twitter:image', getAbsoluteUrl('/og-image.png'));
       
       // Remove article specific tags
       removeMetaTag('article:published_time');
       removeMetaTag('article:author');
     };
   }, [post]);
+
+  // Helper function to get absolute URL
+  const getAbsoluteUrl = (url: string): string => {
+    if (url.startsWith('http')) return url;
+    
+    // If it's a relative URL starting with / use the origin
+    if (url.startsWith('/')) {
+      return `${window.location.origin}${url}`;
+    }
+    
+    // If it's a relative URL without /, use origin + /
+    return `${window.location.origin}/${url}`;
+  };
 
   // Helper function to update meta tags
   const updateMetaTag = (name: string, content: string) => {

@@ -20,6 +20,70 @@ export default function BlogPostPage() {
   const refreshTimerRef = useRef<number | null>(null);
 
   console.log("BlogPostPage params:", params);
+  
+  // Helper function to update meta tags directly
+  const updateMetaTag = (name: string, content: string) => {
+    // Handle OpenGraph and Twitter tags differently
+    const isOg = name.startsWith('og:');
+    const isTwitter = name.startsWith('twitter:');
+    const isArticle = name.startsWith('article:');
+    
+    let selector: string;
+    let createAttributes: Record<string, string>;
+    
+    if (isOg || isArticle) {
+      selector = `meta[property="${name}"]`;
+      createAttributes = { property: name, content };
+    } else if (isTwitter) {
+      selector = `meta[name="${name}"]`;
+      createAttributes = { name, content };
+    } else {
+      selector = `meta[name="${name}"]`;
+      createAttributes = { name, content };
+    }
+    
+    // Try to find existing tag
+    let metaTag = document.querySelector(selector);
+    
+    // Update or create meta tag
+    if (metaTag) {
+      metaTag.setAttribute('content', content);
+    } else {
+      metaTag = document.createElement('meta');
+      for (const [attr, value] of Object.entries(createAttributes)) {
+        metaTag.setAttribute(attr, value);
+      }
+      document.head.appendChild(metaTag);
+    }
+  };
+  
+  // Helper function to get absolute URL
+  const getAbsoluteUrl = (url: string): string => {
+    if (url.startsWith('http')) return url;
+    
+    // If it's a relative URL starting with / use the origin
+    if (url.startsWith('/')) {
+      return `${window.location.origin}${url}`;
+    }
+    
+    // If it's a relative URL without /, use origin + /
+    return `${window.location.origin}/${url}`;
+  };
+  
+  // Helper function to add preload link for images
+  const addPreloadLink = (url: string) => {
+    // Remove any existing preload links
+    const existingLinks = document.querySelectorAll('link[rel="preload"][as="image"]');
+    existingLinks.forEach(link => link.remove());
+    
+    // Create new preload link
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.href = url;
+    link.as = 'image';
+    document.head.appendChild(link);
+    console.log("Added preload link for:", url);
+  };
 
   const fetchPost = async (isRetry = false) => {
     try {
@@ -33,6 +97,28 @@ export default function BlogPostPage() {
       if (slug) {
         const fetchedPost = await getPostBySlug(slug);
         console.log("Fetched post:", fetchedPost);
+        
+        // Debug the thumbnail
+        if (fetchedPost) {
+          console.log("Post thumbnail:", fetchedPost.thumbnail);
+          
+          // Ensure thumbnail has absolute URL if it exists
+          if (fetchedPost.thumbnail && !fetchedPost.thumbnail.startsWith('http')) {
+            if (!fetchedPost.thumbnail.startsWith('/')) {
+              fetchedPost.thumbnail = `/${fetchedPost.thumbnail}`;
+            }
+            console.log("Using thumbnail:", fetchedPost.thumbnail);
+            
+            // Set OG image directly to ensure it's picked up by social media
+            const absoluteUrl = getAbsoluteUrl(fetchedPost.thumbnail);
+            console.log("Setting OG image directly:", absoluteUrl);
+            updateMetaTag('og:image', absoluteUrl);
+            updateMetaTag('twitter:image', absoluteUrl);
+            
+            // Add preload link for the image
+            addPreloadLink(absoluteUrl);
+          }
+        }
         
         if (fetchedPost) {
           setPost(fetchedPost);
