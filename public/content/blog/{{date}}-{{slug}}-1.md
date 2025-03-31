@@ -3,6 +3,10 @@ title: Building an Advanced E-commerce Filtering Prototype with Claude and Lovab
 slug: building-advanced-ecommerce-filtering-prototype-claude-lovable
 date: 2025-03-31
 author: Simon Bromander
+excerpt: I built an e-commerce filtering prototype in under 30 minutes using
+  Claude for PRD creation and Lovable for implementation, demonstrating how AI
+  accelerates the design process.RetryClaude can make mistakes. Please
+  double-check responses.
 ---
 In this post, I'll walk you through my detailed process (using a fictional case study) of how I built an e-commerce prototype to test different filtering layouts using Claude and Lovable. You'll see exactly how AI tools can dramatically speed up the prototyping process while maintaining high-quality results.
 
@@ -138,9 +142,7 @@ After a few iterations, Lovable delivered a working prototype with:
 *   Responsive design
     
 
-<img src="https://reflect-assets.app/v1/users/fatNdGIkPcSyQJd63D1g7NiDLPy1/9e952897-4d9f-4c96-9dac-dc37009651c7?key=edaa77eff38d154a376afb3661ada441f2ab2e7ad0811453f48f4db9a2b89be5" alt="" title="" width="2498" height="1806">
-
-<img src="https://reflect-assets.app/v1/users/fatNdGIkPcSyQJd63D1g7NiDLPy1/f16e4365-a1cd-43bc-ab96-06f9bf3a96e2?key=45fe4380a624edb1659d3c0a046fd4d968adff00ffd2e66f01c984fa2463772e" alt="" title="" width="2506" height="1804">
+<img src="https://reflect-assets.app/v1/users/fatNdGIkPcSyQJd63D1g7NiDLPy1/9e952897-4d9f-4c96-9dac-dc37009651c7?key=edaa77eff38d154a376afb3661ada441f2ab2e7ad0811453f48f4db9a2b89be5" alt="" title="" width="2498" height="1806"> <img src="https://reflect-assets.app/v1/users/fatNdGIkPcSyQJd63D1g7NiDLPy1/f16e4365-a1cd-43bc-ab96-06f9bf3a96e2?key=45fe4380a624edb1659d3c0a046fd4d968adff00ffd2e66f01c984fa2463772e" alt="" title="" width="2506" height="1804">
 
 The filters worked perfectly out of the box, and I could switch between layouts using the button in the **bottom right corner**.
 
