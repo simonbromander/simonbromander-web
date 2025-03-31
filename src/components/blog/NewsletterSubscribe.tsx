@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Mail } from "lucide-react";
+import useAnalytics from "@/hooks/useAnalytics";
 
 interface NewsletterSubscribeProps {
   title?: string;
@@ -11,6 +12,7 @@ export function NewsletterSubscribe({
   description = "Signing up is free, unsubscribe anytime."
 }: NewsletterSubscribeProps) {
   const [email, setEmail] = useState('');
+  const { trackEvent } = useAnalytics();
   
   useEffect(() => {
     // Load ConvertKit script
@@ -95,6 +97,12 @@ export function NewsletterSubscribe({
       return;
     }
     
+    // Track the newsletter signup attempt
+    trackEvent('newsletter_signup_attempt', { 
+      source: window.location.pathname,
+      has_email: !!email 
+    });
+    
     // Submit the form data to Kit.com via fetch
     fetch('https://app.kit.com/forms/7847447/subscriptions', {
       method: 'POST',
@@ -104,10 +112,21 @@ export function NewsletterSubscribe({
       body: `email_address=${encodeURIComponent(email)}`,
     })
     .then(response => {
+      // Track successful submission
+      trackEvent('newsletter_signup_success', { 
+        source: window.location.pathname,
+        has_email: !!email 
+      });
       // Redirect to thanks page regardless of success/failure
       window.location.href = `${window.location.origin}/#/thanks?source=${encodeURIComponent(window.location.pathname)}&email=${encodeURIComponent(email)}`;
     })
     .catch(error => {
+      // Track error
+      trackEvent('newsletter_signup_error', { 
+        source: window.location.pathname,
+        has_email: !!email,
+        error: error.message 
+      });
       console.error('Error submitting form:', error);
       // Still redirect to thanks page on error
       window.location.href = `${window.location.origin}/#/thanks?source=${encodeURIComponent(window.location.pathname)}&email=${encodeURIComponent(email)}`;

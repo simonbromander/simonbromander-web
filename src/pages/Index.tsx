@@ -48,7 +48,11 @@ const Index = () => {
   };
   
   const handleScheduleCallClick = () => {
-    trackEvent('schedule_call_click', { source: 'homepage' });
+    trackEvent('schedule_call_click', { 
+      source: 'homepage',
+      location: window.location.pathname,
+      timestamp: new Date().toISOString()
+    });
   };
 
   return (
