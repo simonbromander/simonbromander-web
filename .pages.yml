@@ -23,8 +23,9 @@ content:
       - name: slug
         label: URL Slug
         type: string
-        description: "The URL-friendly identifier for this post (lowercase, no spaces)"
+        description: "The URL-friendly identifier for this post (lowercase, no spaces, use hyphens)"
         required: true
+        pattern: ^[a-z0-9-]+$
       - name: date
         label: Publish Date
         type: date
@@ -44,6 +45,6 @@ content:
       - name: body
         label: Content
         type: rich-text
-    filename: '{{date}}-{{slug}}.md'  # Use date and slug in the filename
+    filename: '{{"date"|date:"YYYY-MM-DD"}}-{{slug}}.md'  # More explicit date formatting
     hooks:
-      afterChange: npm run generate-blog-index && npm run fix-blog-filenames 
+      afterChange: npm run generate-blog-index 
