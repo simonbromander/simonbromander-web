@@ -1,5 +1,9 @@
-# Redirects for blog posts
-/blog/* /#/blog/:splat 301
+# Direct access to blog posts (for social media sharing)
+/blog/:slug.html  /blog/:slug.html  200
+/:slug.html       /:slug.html       200
+
+# Regular blog redirects
+/blog/:slug  /#/blog/:slug  301
 
 # Fallback to index for client-side routing
-/* /index.html 200 
+/*  /index.html  200 

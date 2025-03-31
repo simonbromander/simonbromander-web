@@ -27,6 +27,29 @@
     <meta name="twitter:image" content="https://simonbromander.com/og-image.png" />
     <meta name="twitter:site" content="@simonbromander" />
     <meta name="twitter:creator" content="@simonbromander" />
+    
+    <!-- This helps with preconnecting to improve loading performance -->
+    <link rel="preconnect" href="https://simonbromander.com" />
+    <link rel="dns-prefetch" href="https://simonbromander.com" />
+    
+    <!-- This script will get SEO-friendly URLs for blog posts from hash-based URLs -->
+    <script type="text/javascript">
+      // Check if we need to redirect to a blog post
+      (function() {
+        var path = window.location.pathname;
+        var hash = window.location.hash;
+        
+        // If we have a blog post hash but no path, redirect to the proper URL
+        if (hash.startsWith('#/blog/') && path === '/') {
+          var slug = hash.replace('#/blog/', '');
+          if (slug) {
+            console.log('Detected blog post in hash: ' + slug);
+            // We don't redirect, just note that we found a blog post
+            // This helps with debugging social media shares
+          }
+        }
+      })();
+    </script>
   </head>
 
   <body>
