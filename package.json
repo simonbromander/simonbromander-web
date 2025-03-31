@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/setup-blog-dirs.js && vite",
-    "prebuild": "node scripts/setup-blog-dirs.js && node scripts/generate-blog-index.js",
+    "prebuild": "node scripts/setup-blog-dirs.js && node scripts/generate-blog-index.js && node scripts/generate-social-pages.js",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
     "generate-blog-index": "node scripts/generate-blog-index.js",
+    "generate-social-pages": "node scripts/generate-social-pages.js",
     "setup-blog": "node scripts/setup-blog-dirs.js",
     "fix-blog-filenames": "node scripts/fix-blog-filenames.js",
     "update-all-blog-filenames": "node scripts/update-all-blog-filenames.js"

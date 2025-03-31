@@ -1,5 +1,6 @@
 ---
 title: Micro-apps are making a comeback—just not how Apple imagined.
+slug: micro-apps-are-making-a-comebackjust-not-how-apple-imagined
 date: 2025-03-06
 author: Simon Bromander
 thumbnail: /images/574_1x_shots_so.png

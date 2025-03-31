@@ -1,2 +1,5 @@
-/admin/*  /admin/index.html  200
-/*  /index.html  200 
+# Redirects for blog posts
+/blog/* /#/blog/:splat 301
+
+# Fallback to index for client-side routing
+/* /index.html 200 
