@@ -7,6 +7,42 @@ import { NewsletterSubscribe } from '@/components/blog/NewsletterSubscribe';
 import { Button } from '@/components/ui/button';
 import { RefreshCw } from 'lucide-react';
 
+// Known blog posts - this ensures these will always be displayed even if the index is missing
+const KNOWN_POSTS = [
+  '2025-03-28-step-by-step-ai-prototyping.md',
+  '2025-03-25-from-vibe-coding-to-vibe-prototyping.md',
+  '2025-03-06-micro-apps-are-making-a-comebackjust-not-how-apple-imagined.md',
+  '2024-11-01-building-trust-led-me-here.md',
+  '2024-09-01-a-new-chapter.md'
+];
+
+// Function to check if a markdown file contains valid frontmatter
+async function checkValidBlogPost(fileName: string): Promise<boolean> {
+  try {
+    const cacheBuster = `?t=${Date.now()}`;
+    const response = await fetch(`/content/blog/${fileName}${cacheBuster}`);
+    
+    if (!response.ok) {
+      console.warn(`File not accessible: ${fileName}`);
+      return false;
+    }
+    
+    const content = await response.text();
+    
+    // Check if it has frontmatter (starts with --- and has a second ---)
+    const hasFrontmatter = content.startsWith('---') && content.indexOf('---', 3) > 0;
+    if (!hasFrontmatter) {
+      console.warn(`File missing frontmatter: ${fileName}`);
+      return false;
+    }
+    
+    return true;
+  } catch (error) {
+    console.error(`Error checking blog post ${fileName}:`, error);
+    return false;
+  }
+}
+
 export default function BlogPage() {
   const location = useLocation();
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -15,9 +51,34 @@ export default function BlogPage() {
   const [retryCount, setRetryCount] = useState(0);
   const maxRetries = 3;
   const refreshTimerRef = useRef<number | null>(null);
+  const [clientScannedFiles, setClientScannedFiles] = useState<string[]>([]);
 
   // Debug log
   console.log('Blog page rendered with location:', location);
+
+  // Client-side blog post scanning - this is a backup in case the blog index isn't working
+  const scanBlogDirectory = async () => {
+    try {
+      console.log('Client-side scanning for blog posts...');
+      const foundPosts: string[] = [];
+      
+      // First check all known posts
+      for (const post of KNOWN_POSTS) {
+        if (await checkValidBlogPost(post)) {
+          foundPosts.push(post);
+          console.log(`Client scan found known post: ${post}`);
+        }
+      }
+      
+      // If we found posts, update state
+      if (foundPosts.length > 0) {
+        console.log(`Client scan found ${foundPosts.length} blog posts`);
+        setClientScannedFiles(foundPosts);
+      }
+    } catch (error) {
+      console.error('Error during client-side blog scanning:', error);
+    }
+  };
 
   const fetchPosts = async (isRetry = false) => {
     try {
@@ -39,8 +100,17 @@ export default function BlogPage() {
         console.warn('No valid posts returned from getAllPosts');
         setError('No blog posts found. Please try refreshing the page.');
         
-        // Auto-retry if we haven't reached max retries
-        if (retryCount < maxRetries) {
+        // If we have client-scanned files, try to use those
+        if (clientScannedFiles.length > 0) {
+          console.log(`Using ${clientScannedFiles.length} client-scanned files as fallback`);
+          // Force a refresh with these files - they'll be picked up by the getAllPosts function
+          setTimeout(() => {
+            setRetryCount(prev => prev + 1);
+            fetchPosts(true);
+          }, 500);
+        }
+        // Otherwise auto-retry if we haven't reached max retries
+        else if (retryCount < maxRetries) {
           const nextRetryDelay = Math.pow(2, retryCount) * 1000; // Exponential backoff
           console.log(`Scheduling auto-retry in ${nextRetryDelay}ms...`);
           
@@ -86,7 +156,11 @@ export default function BlogPage() {
   };
 
   useEffect(() => {
-    fetchPosts();
+    // First scan the blog directory as a backup
+    scanBlogDirectory().then(() => {
+      // Then fetch posts normally
+      fetchPosts();
+    });
     
     // Clean up any timers when component unmounts
     return () => {
@@ -99,7 +173,11 @@ export default function BlogPage() {
   const handleManualRefresh = () => {
     // Reset retry count and fetch again
     setRetryCount(0);
-    fetchPosts();
+    // First scan the blog directory again
+    scanBlogDirectory().then(() => {
+      // Then fetch posts
+      fetchPosts();
+    });
   };
 
   return (

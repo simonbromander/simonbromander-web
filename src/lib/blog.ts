@@ -154,19 +154,72 @@ async function getFileIndex(): Promise<string[]> {
     
   console.log('Using fallback methods for blog index...');
   
-  // Fallback 1: Try to directly access the blog directory
+  // Direct scanning of blog directory
   try {
-    const directoryResponse = await fetch('/content/blog/');
-    if (directoryResponse.ok) {
-      const html = await directoryResponse.text();
-      // Parse the HTML to extract filenames
-      const matches = html.match(/href="([^"]+\.md)"/g) || [];
-      const files = matches.map(match => match.replace(/href="(.+)"/, '$1'));
-      console.log(`Fallback 1 successful: Found ${files.length} files via directory listing`);
+    console.log('Directly scanning blog directory...');
+    const files = [];
+    
+    // Known blog posts - ALWAYS include these regardless of the index file
+    // This ensures that even if nothing else works, at least these will be shown
+    const knownPosts = [
+      '2025-03-28-step-by-step-ai-prototyping.md',
+      '2025-03-25-from-vibe-coding-to-vibe-prototyping.md',
+      '2025-03-06-micro-apps-are-making-a-comebackjust-not-how-apple-imagined.md',
+      '2024-11-01-building-trust-led-me-here.md',
+      '2024-09-01-a-new-chapter.md'
+    ];
+    
+    // Add cache buster to avoid caching issues
+    const cacheBuster = `?t=${Date.now()}`;
+    
+    // Add all known posts
+    for (const post of knownPosts) {
+      // Verify if the file exists before adding it
+      try {
+        const response = await fetch(`/content/blog/${post}${cacheBuster}`, { method: 'HEAD' });
+        if (response.ok) {
+          files.push(post);
+          console.log(`Found known post: ${post}`);
+        }
+      } catch (error) {
+        console.log(`Known post not found: ${post}`);
+      }
+    }
+    
+    // Try to discover other files by scanning the directory
+    try {
+      const directoryResponse = await fetch('/content/blog/');
+      if (directoryResponse.ok) {
+        const html = await directoryResponse.text();
+        // Parse the HTML to extract filenames
+        const matches = html.match(/href="([^"]+\.md)"/g) || [];
+        const directoryFiles = matches
+          .map(match => match.replace(/href="(.+)"/, '$1'))
+          .filter(file => 
+            !file.includes('{{') && 
+            !file.includes('}}') && 
+            !knownPosts.includes(file)
+          );
+        
+        // Add discovered files that aren't already in the list
+        for (const file of directoryFiles) {
+          if (!files.includes(file)) {
+            files.push(file);
+            console.log(`Discovered additional post: ${file}`);
+          }
+        }
+      }
+    } catch (e) {
+      console.log('Directory listing failed:', e);
+    }
+    
+    // If we found any files, return them
+    if (files.length > 0) {
+      console.log(`Direct scanning found ${files.length} blog posts`);
       return files;
     }
   } catch (e) {
-    console.log('Directory listing fallback failed:', e);
+    console.error('Error during direct scanning:', e);
   }
   
   // Fallback 2: Try to find individual post files based on known patterns
@@ -206,7 +259,7 @@ async function getFileIndex(): Promise<string[]> {
     console.log('Pattern checking fallback failed:', e);
   }
   
-  // Fallback 3: Use the most recent posts we know about
+  // Fallback 3: Use the most recent posts we know about - hardcoded list if everything else fails
   console.log('Using hardcoded fallback list of known posts');
   return [
     '2025-03-28-step-by-step-ai-prototyping.md',
