@@ -112,7 +112,32 @@ function parseFrontmatter(content: string): { frontmatter: Record<string, any>; 
 async function getFileIndex(): Promise<string[]> {
   try {
     console.log('Fetching blog index...');
-    // Add cache buster to avoid caching issues
+    
+    // First try to get the manifest that points to the latest timestamped index
+    try {
+      const cacheBuster = `?t=${Date.now()}`;
+      const manifestResponse = await fetch(`/content/blog-index-manifest.json${cacheBuster}`);
+      
+      if (manifestResponse.ok) {
+        const manifest = await manifestResponse.json();
+        console.log(`Found blog index manifest, latest index: ${manifest.latest}`);
+        
+        // Now fetch the timestamped index file
+        const timestampedIndexResponse = await fetch(`/content/${manifest.latest}${cacheBuster}`);
+        
+        if (timestampedIndexResponse.ok) {
+          const data = await timestampedIndexResponse.json();
+          console.log(`Successfully loaded timestamped blog index with ${data.files?.length || 0} posts`);
+          return data.files || [];
+        } else {
+          console.warn(`Timestamped index file not found, falling back to regular index`);
+        }
+      }
+    } catch (e) {
+      console.warn('Error fetching blog index manifest, falling back to regular index:', e);
+    }
+    
+    // Fallback to regular index with cache busting
     const cacheBuster = `?t=${Date.now()}`;
     const response = await fetch(`/content/blog-index.json${cacheBuster}`);
     

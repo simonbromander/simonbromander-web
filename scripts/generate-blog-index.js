@@ -56,6 +56,31 @@ function isValidBlogPost(filePath) {
   }
 }
 
+// Helper function to extract date from filename
+function extractDateFromFilename(filename) {
+  const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})/);
+  return dateMatch ? dateMatch[1] : null;
+}
+
+// Helper function to extract date from frontmatter
+function extractDateFromFrontmatter(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const frontmatterMatch = content.match(/^---\s*([\s\S]*?)\s*---/);
+    
+    if (frontmatterMatch) {
+      const frontmatterStr = frontmatterMatch[1];
+      const dateMatch = frontmatterStr.match(/date:\s*["']?(\d{4}-\d{2}-\d{2})["']?/);
+      return dateMatch ? dateMatch[1] : null;
+    }
+    
+    return null;
+  } catch (error) {
+    console.error(`Error extracting date from frontmatter in ${filePath}:`, error);
+    return null;
+  }
+}
+
 // Read the blog directory and generate the index
 try {
   console.log(`Scanning blog directory: ${BLOG_DIR}`);
@@ -73,10 +98,10 @@ try {
   
   // Filter for .md files, excluding template files
   const files = allFiles
-    .filter(file => file.endsWith('.md'))
+    .filter(file => file.endsWith('.md') || file.endsWith('.mdx') || file.endsWith('.markdown'))
     .filter(file => !file.includes('{{') && !file.includes('}}'));
   
-  console.log(`Found ${files.length} .md files (excluding templates)`);
+  console.log(`Found ${files.length} markdown files (excluding templates)`);
   
   // Validate each blog post
   const validatedFiles = files.filter(file => {
@@ -88,17 +113,54 @@ try {
   
   console.log(`Found ${validatedFiles.length} valid blog posts`);
   
-  // Sort files by date (newest first) - assuming the filename starts with a date
+  // Sort files by:
+  // 1. Files with date in filename (newest first)
+  // 2. Files with date in frontmatter (newest first)
+  // 3. Non-dated files by modification time (newest first)
   validatedFiles.sort((a, b) => {
-    // Extract date from filename if possible (YYYY-MM-DD format)
-    const dateA = a.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
-    const dateB = b.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
+    // Try to extract dates from filenames
+    const dateA = extractDateFromFilename(a);
+    const dateB = extractDateFromFilename(b);
     
-    // Sort in descending order (newest first)
-    return dateB.localeCompare(dateA);
+    // If both have dates in filename, compare them
+    if (dateA && dateB) {
+      return dateB.localeCompare(dateA); // Sort newest first
+    }
+    
+    // If only one has a date in filename, prioritize it
+    if (dateA) return -1;
+    if (dateB) return 1;
+    
+    // If neither has a date in filename, try frontmatter
+    const frontmatterDateA = extractDateFromFrontmatter(path.join(BLOG_DIR, a));
+    const frontmatterDateB = extractDateFromFrontmatter(path.join(BLOG_DIR, b));
+    
+    // If both have dates in frontmatter, compare them
+    if (frontmatterDateA && frontmatterDateB) {
+      return frontmatterDateB.localeCompare(frontmatterDateA); // Sort newest first
+    }
+    
+    // If only one has a date in frontmatter, prioritize it
+    if (frontmatterDateA) return -1;
+    if (frontmatterDateB) return 1;
+    
+    // If neither has a date, fall back to file stats (last modified time)
+    try {
+      const statsA = fs.statSync(path.join(BLOG_DIR, a));
+      const statsB = fs.statSync(path.join(BLOG_DIR, b));
+      return statsB.mtimeMs - statsA.mtimeMs; // Sort newest first
+    } catch (error) {
+      console.error('Error comparing file stats:', error);
+      return 0;
+    }
   });
   
-  // Write the index file
+  // Generate a better name for the json file to avoid caching issues
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const indexFileName = `blog-index-${timestamp}.json`;
+  const INDEX_FILE_WITH_TIMESTAMP = path.join(outputDir, indexFileName);
+  
+  // Regular index file for compatibility
   const indexData = {
     generatedAt: new Date().toISOString(),
     count: validatedFiles.length,
@@ -108,10 +170,21 @@ try {
   const indexJson = JSON.stringify(indexData, null, 2);
   fs.writeFileSync(INDEX_FILE, indexJson);
   
+  // Also write a timestamped version to ensure cache refresh
+  fs.writeFileSync(INDEX_FILE_WITH_TIMESTAMP, indexJson);
+  
+  // Create/update a manifest file that points to the latest timestamped index
+  const manifestData = {
+    latest: indexFileName,
+    timestamp: new Date().toISOString()
+  };
+  fs.writeFileSync(path.join(outputDir, 'blog-index-manifest.json'), JSON.stringify(manifestData, null, 2));
+  
   // Verify the index was written correctly
   if (fs.existsSync(INDEX_FILE)) {
     const stats = fs.statSync(INDEX_FILE);
     console.log(`Blog index written: ${INDEX_FILE} (${stats.size} bytes)`);
+    console.log(`Timestamped blog index written: ${INDEX_FILE_WITH_TIMESTAMP} (${stats.size} bytes)`);
     
     // Double-check the file can be read as JSON
     try {
