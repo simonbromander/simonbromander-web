@@ -9,7 +9,7 @@ excerpt: I built an e-commerce filtering prototype in under 30 minutes using
   accelerates the design process.RetryClaude can make mistakes. Please
   double-check responses.
 ---
-In this post, I'll walk you through my detailed process (using a fictional case study) of how I built an e-commerce prototype to test different filtering layouts using Claude and Lovable. You'll see exactly how AI tools can dramatically speed up the prototyping process while maintaining high-quality results.
+In this post, I'll walk you through my detailed process (using a fictional case study) of how I built an e-commerce prototype to test different filtering layouts using [Claude](https://claude.ai/) and [Lovable](https://lovable.dev). You'll see exactly how AI tools can dramatically speed up the prototyping process while maintaining high-quality results.
 
 Test the prototype yourself here:[https://grocery-gateway-compare.lovable.app/](https://grocery-gateway-compare.lovable.app/)  
 It is not perfect, but I did build this in less than 30 minutes.
