@@ -165,7 +165,17 @@ Lovable responded positively and implemented cart functionality:
 
 "Let's implement the functionality to add items to the cart. We'll need to create a cart context, update the product card, and add toast notifications for user feedback."
 
-A couple of minutes later I had a "add to cart button" on the cards, as well as "toast" message confirming that it has been added. The cart also counts the number of items I add.
+A couple of minutes later I had a "add to cart button" on the cards, as well as "toast" message confirming that it has been added. The cart also counts the number of items I add.  
+
+## Want to do "lo-fi" style? Just add the following prompt
+
+```
+Can you make this prototype more "lo-fi", more abstract and black/white? Remove all photos and use placeholder images.
+```
+
+![](/images/89_1x_shots_so.png)
+
+## Final prototype
 
 ## Next steps
 
