@@ -5,5 +5,13 @@
 # Regular blog redirects
 /blog/:slug  /#/blog/:slug  301
 
+# Redirect old blog posts to Beehiiv
+/blog/a-new-chapter  https://blog.simonbromander.com/p/a-new-beginning  301
+/blog/building-trust-led-me-here  https://blog.simonbromander.com/p/building-trust-led-me-here  301
+/blog/micro-apps-are-making-a-comebackjust-not-how-apple-imagined  https://blog.simonbromander.com/p/micro-apps-are-making-a-comeback  301
+/blog/from-vibe-coding-to-vibe-prototyping  https://blog.simonbromander.com/p/vibe-coding-vibe-prototyping  301
+/blog/step-by-step-ai-prototyping  https://blog.simonbromander.com/p/a-step-by-step-guide-to-dramatically-reducing-prototyping-time-using-ai-tools  301
+/blog/building-advanced-ecommerce-filtering-prototype-claude-lovable  https://blog.simonbromander.com/p/building-an-advanced-e-commerce-filtering-prototype-with-claude-and-lovable  301
+
 # Fallback to index for client-side routing
 /*  /index.html  200 
