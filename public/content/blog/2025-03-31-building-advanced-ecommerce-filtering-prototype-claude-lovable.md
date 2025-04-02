@@ -176,6 +176,7 @@ Can you make this prototype more "lo-fi", more abstract and black/white? Remove 
 ![](/images/89_1x_shots_so.png)
 
 ## Final prototype
+<div style="width:100%;height:0;padding-bottom:78%;position:relative;"><iframe src="https://giphy.com/embed/86DELt9kYswaIb7Z0p" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/86DELt9kYswaIb7Z0p">via GIPHY</a></p>
 
 ## Next steps
 
