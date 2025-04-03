@@ -81,12 +81,12 @@ const Index = () => {
               Book Office Hours
             </h2>
           </div>
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-400 text-base leading-relaxed">
             Interested in advisory or personal coaching? I offer free 30-minute office hours to help individuals and startups with their product and UX challenges. Let's chat!
           </p>
           <div className="flex items-center">
             <a 
-              href="https://cal.com/simonbromander/office-hours-startup?date=2025-02-14&month=2025-02" 
+              href="https://cal.com/simonbromander/office-hours-startup" 
               target="_blank" 
               rel="noopener noreferrer" 
               onClick={handleScheduleCallClick}
