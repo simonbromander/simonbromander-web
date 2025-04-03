@@ -19,9 +19,9 @@ const navLinks = [{
   isExternal: false
 }, {
   icon: PenLine,
-  url: "/blog",
+  url: "https://blog.simonbromander.com",
   label: "Blog",
-  isExternal: false
+  isExternal: true
 }];
 
 // Social/External links
