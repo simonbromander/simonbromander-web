@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { AtSign, BookOpen, Linkedin, Mail, Camera, PenLine, Settings, Home, ExternalLink } from "lucide-react";
+import { AtSign, BookOpen, Linkedin, Mail, Camera, Settings, Home, ExternalLink } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link } from 'react-router-dom';
 import { Separator } from "@/components/ui/separator";
@@ -17,11 +17,6 @@ const navLinks = [{
   url: "/",
   label: "Home",
   isExternal: false
-}, {
-  icon: PenLine,
-  url: "https://blog.simonbromander.com",
-  label: "Blog",
-  isExternal: true
 }];
 
 // Social/External links
