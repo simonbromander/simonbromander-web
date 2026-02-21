@@ -1,11 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AtSign, BookOpen, Linkedin, Mail, CheckCircle2, Calendar, Link2, Users, Camera, ExternalLink, PenLine } from "lucide-react";
+import { AtSign, BookOpen, Linkedin, Mail, CheckCircle2, Calendar, Link2, Users, Camera, ExternalLink } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Layout } from "@/components/layout/Layout";
 import useAnalytics from "@/hooks/useAnalytics";
-import { NewsletterSubscribe } from "@/components/blog/NewsletterSubscribe";
+
 
 const Index = () => {
   const { trackEvent } = useAnalytics();
@@ -25,11 +25,6 @@ const Index = () => {
     icon: BookOpen,
     url: "https://substack.com/@simonbromander",
     label: "Substack",
-    bgColor: "bg-neutral-100/80 dark:bg-neutral-800/80"
-  }, {
-    icon: PenLine,
-    url: "#/blog",
-    label: "Blog",
     bgColor: "bg-neutral-100/80 dark:bg-neutral-800/80"
   }, {
     icon: Linkedin,
@@ -99,9 +94,6 @@ const Index = () => {
             </a>
           </div>
         </div>
-        
-        {/* Newsletter subscription */}
-        <NewsletterSubscribe />
       </div>
     </Layout>
   );
