@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { AtSign, BookOpen, Linkedin, Mail, Camera, Settings, Home, ExternalLink } from "lucide-react";
+import { AtSign, BookOpen, Linkedin, Mail, Settings, Home, ExternalLink } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link } from 'react-router-dom';
 import { Separator } from "@/components/ui/separator";
@@ -34,11 +34,6 @@ const socialLinks = [{
   icon: Linkedin,
   url: "https://www.linkedin.com/in/simonbromander/",
   label: "LinkedIn",
-  isExternal: true
-}, {
-  icon: Camera,
-  url: "http://photography.simonbromander.com",
-  label: "Photography Portfolio",
   isExternal: true
 }];
 
