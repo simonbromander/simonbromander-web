@@ -1,25 +1,14 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { AtSign, BookOpen, Linkedin, Mail, Settings, Home, ExternalLink } from "lucide-react";
+import { AtSign, Linkedin, Mail } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Link } from 'react-router-dom';
-import { Separator } from "@/components/ui/separator";
 import useAnalytics from "@/hooks/useAnalytics";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-// Site navigation links
-const navLinks = [{
-  icon: Home,
-  url: "/",
-  label: "Home",
-  isExternal: false
-}];
-
-// Social/External links
 const socialLinks = [{
   icon: AtSign,
   url: "https://www.threads.net/@simonbromander",
@@ -39,14 +28,7 @@ const socialLinks = [{
 
 export function Layout({ children }: LayoutProps) {
   const { trackEvent } = useAnalytics();
-  
-  const handleNavLinkClick = (label: string, isExternal: boolean) => {
-    trackEvent('navigation_link_click', { 
-      link: label, 
-      type: isExternal ? 'external' : 'internal' 
-    });
-  };
-  
+
   const handleSocialLinkClick = (label: string) => {
     trackEvent('social_link_click', { platform: label });
   };
@@ -56,15 +38,15 @@ export function Layout({ children }: LayoutProps) {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 py-12 px-4 relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 py-12 px-4 relative overflow-hidden md:flex md:items-center">
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2" />
-      
+
       <div className="fixed top-4 right-4 z-50">
         <ThemeToggle />
       </div>
 
-      <div className="max-w-6xl mx-auto relative">
+      <div className="max-w-6xl mx-auto relative w-full">
         <div className="md:flex md:gap-12">
           <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 h-fit">
             <div className="space-y-6">
@@ -73,23 +55,23 @@ export function Layout({ children }: LayoutProps) {
                 <AvatarFallback>SB</AvatarFallback>
               </Avatar>
               <div>
-                <h1 className="text-3xl font-bold text-neutral-800 dark:text-neutral-100">
+                <h1
+                  className="text-2xl font-bold text-neutral-800 dark:text-neutral-100 whitespace-nowrap"
+                  style={{ fontFamily: "'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif" }}
+                >
                   Simon Bromander
                 </h1>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 flex items-center gap-2 justify-center md:justify-start">
-                  <span>Product & Design at</span>
-                  <Button asChild variant="ghost" className="group px-0">
-                    <a
-                      href="https://fintower.ai"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={handleFintowerClick}
-                      className="bg-gradient-to-r from-purple-500 to-emerald-600 bg-clip-text text-transparent font-semibold hover:opacity-80 transition-opacity inline-flex items-center"
-                    >
-                      fintower.ai
-                      <ExternalLink className="w-3 h-3 ml-1 opacity-70" />
-                    </a>
-                  </Button>
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 text-center md:text-left">
+                  Designing and shipping product at{' '}
+                  <a
+                    href="https://fintower.ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleFintowerClick}
+                    className="bg-gradient-to-r from-purple-500 to-emerald-600 bg-clip-text text-transparent font-semibold hover:opacity-80 transition-opacity"
+                  >
+                    fintower.ai
+                  </a>
                 </p>
               </div>
               <div className="space-y-2">
@@ -104,45 +86,11 @@ export function Layout({ children }: LayoutProps) {
                 </a>
               </div>
               
-              {/* Navigation Section */}
-              <div className="space-y-2">
-                <div className="flex flex-col space-y-1">
-                  {navLinks.map((link, index) => (
-                    <Button key={index} asChild variant="ghost" size="sm" className="justify-start h-8 px-2 font-normal">
-                      {link.isExternal ? (
-                        <a 
-                          href={link.url} 
-                          className="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400"
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          onClick={() => handleNavLinkClick(link.label, link.isExternal)}
-                        >
-                          <link.icon className="w-4 h-4" />
-                          <span>{link.label}</span>
-                          <ExternalLink className="w-3 h-3 ml-1 opacity-70" />
-                        </a>
-                      ) : (
-                        <Link 
-                          to={link.url} 
-                          className="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400"
-                          onClick={() => handleNavLinkClick(link.label, link.isExternal)}
-                        >
-                          <link.icon className="w-4 h-4" />
-                          <span>{link.label}</span>
-                        </Link>
-                      )}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-              
-              <Separator className="my-4" />
-              
               {/* Social Links Section */}
               <div className="space-y-2">
                 <div className="flex flex-col space-y-1">
                   {socialLinks.map((link, index) => (
-                    <Button key={index} asChild variant="ghost" size="sm" className="justify-start h-8 px-2 font-normal">
+                    <Button key={index} asChild variant="ghost" size="sm" className="justify-center md:justify-start h-8 px-2 font-normal">
                       <a 
                         href={link.url} 
                         target="_blank" 
@@ -152,7 +100,6 @@ export function Layout({ children }: LayoutProps) {
                       >
                         <link.icon className="w-4 h-4" />
                         <span>{link.label}</span>
-                        <ExternalLink className="w-3 h-3 ml-1 opacity-70" />
                       </a>
                     </Button>
                   ))}
@@ -161,7 +108,7 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
 
-          <div className="flex-grow space-y-8 mt-8 md:mt-0 min-h-[500px]">
+          <div className="flex-grow space-y-8 mt-8 md:mt-[7.5rem] min-h-[500px]">
             {children}
           </div>
         </div>
