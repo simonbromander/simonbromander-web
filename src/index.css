@@ -51,20 +51,38 @@
 }
 
 @layer base {
+  html {
+    font-size: 87.5%;
+  }
   * {
     @apply border-border;
   }
   body {
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     @apply bg-background text-foreground antialiased;
+  }
+  h1, h2 {
+    font-family: 'Fraunces', ui-serif, Georgia, serif;
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  h3, h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
   }
 }
 
-/* Custom styles for smooth link transitions */
 a {
-  @apply transition-all duration-200;
+  transition-property: color, background-color, border-color, opacity;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Smooth page transitions */
 .page-transition {
-  @apply transition-all duration-300 ease-in-out;
+  transition-property: opacity, transform;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }

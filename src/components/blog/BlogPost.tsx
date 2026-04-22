@@ -31,10 +31,10 @@ export function BlogPost({ title, content, html, date, author, thumbnail }: Blog
     <article className="prose prose-lg dark:prose-invert max-w-3xl">
       <header className="mb-8">
         {thumbnail && (
-          <div className="mb-6 w-full max-h-96 overflow-hidden rounded-2xl">
-            <img 
-              src={thumbnail} 
-              alt={title} 
+          <div className="mb-6 w-full max-h-96 overflow-hidden rounded-2xl outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10">
+            <img
+              src={thumbnail}
+              alt={title}
               className="w-full object-cover rounded-2xl"
             />
           </div>

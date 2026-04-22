@@ -61,11 +61,11 @@ export function BlogList({ posts }: BlogListProps) {
           >
             <Card className="h-full hover:shadow-lg transition-shadow backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 border-neutral-200/60 dark:border-neutral-700/40">
               {post.thumbnail && (
-                <div className="w-full h-48 overflow-hidden rounded-t-lg">
-                  <img 
-                    src={post.thumbnail} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover" 
+                <div className="w-full h-48 overflow-hidden rounded-t-lg outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10">
+                  <img
+                    src={post.thumbnail}
+                    alt={post.title}
+                    className="w-full h-full object-cover"
                   />
                 </div>
               )}
