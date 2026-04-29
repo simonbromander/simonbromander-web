@@ -48,7 +48,7 @@ export function Layout({ children }: LayoutProps) {
 
       <div className="max-w-6xl mx-auto relative w-full">
         <div className="md:flex md:gap-12">
-          <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 h-fit">
+          <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 h-fit animate-fade-up">
             <div className="space-y-6">
               <Avatar className="w-32 h-32 mx-auto md:mx-0 border-4 border-white/80 dark:border-neutral-800/80 shadow-lg backdrop-blur-sm">
                 <AvatarImage src="lovable-uploads/1630ba4e-617c-4ba9-beac-f977a3cd5ccd.png" />
@@ -75,7 +75,7 @@ export function Layout({ children }: LayoutProps) {
                 </p>
               </div>
               <div className="space-y-2">
-                <a href="#" className="inline-block px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">
+                <a href="#" className="inline-block px-4 py-2.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">
                   <div className="flex items-center justify-center gap-2">
                     <span className="relative flex h-3 w-3">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -90,7 +90,7 @@ export function Layout({ children }: LayoutProps) {
               <div className="space-y-2">
                 <div className="flex flex-col space-y-1">
                   {socialLinks.map((link, index) => (
-                    <Button key={index} asChild variant="ghost" size="sm" className="justify-center md:justify-start h-8 px-2 font-normal">
+                    <Button key={index} asChild variant="ghost" size="sm" className="justify-center md:justify-start h-10 px-3 font-normal">
                       <a 
                         href={link.url} 
                         target="_blank" 

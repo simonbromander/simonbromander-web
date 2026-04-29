@@ -27,7 +27,10 @@ export default function ThanksPage() {
   return (
     <Layout>
       <div className="space-y-8">
-        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20">
+        <div
+          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-white/20 dark:border-neutral-700/20 animate-fade-up"
+          style={{ animationDelay: '120ms' }}
+        >
           <Button 
             variant="outline" 
             size="sm" 

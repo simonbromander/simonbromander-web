@@ -50,13 +50,14 @@ export function BlogList({ posts }: BlogListProps) {
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      {posts.map((post) => {
+      {posts.map((post, index) => {
         const postUrl = `#/blog/${cleanSlug(post.slug)}`;
         return (
-          <a 
-            href={postUrl} 
-            key={post.id} 
-            className="block no-underline group"
+          <a
+            href={postUrl}
+            key={post.id}
+            className="block no-underline group animate-fade-up"
+            style={{ animationDelay: `${240 + index * 80}ms` }}
             onClick={() => handlePostClick(post)}
           >
             <Card className="h-full hover:shadow-lg transition-shadow backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 border-neutral-200/60 dark:border-neutral-700/40">

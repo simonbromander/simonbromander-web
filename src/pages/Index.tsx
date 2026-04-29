@@ -33,7 +33,10 @@ const Index = () => {
   return (
     <Layout>
       <div className="space-y-8">
-        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-8">
+        <div
+          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-8 animate-fade-up"
+          style={{ animationDelay: '120ms' }}
+        >
           <div className="space-y-2 text-neutral-700 dark:text-neutral-300 text-base">
             <h2 className="text-3xl font-bold text-neutral-800 dark:text-neutral-100">
               Designer who ships.
@@ -67,7 +70,7 @@ const Index = () => {
                           width={16}
                           height={16}
                           loading="lazy"
-                          className="w-4 h-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition duration-200"
+                          className="w-4 h-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-[filter,opacity] duration-200"
                         />
                       </span>
                       <span>{company.name}</span>
@@ -91,7 +94,10 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6">
+        <div
+          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6 animate-fade-up"
+          style={{ animationDelay: '240ms' }}
+        >
           <div className="flex items-center space-x-4">
             <div className="p-2 rounded-lg bg-purple-100/50 dark:bg-purple-900/20">
               <Sparkles className="w-5 h-5 text-purple-700 dark:text-purple-300" />
@@ -132,7 +138,10 @@ const Index = () => {
           </ul>
         </div>
 
-        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6">
+        <div
+          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6 animate-fade-up"
+          style={{ animationDelay: '360ms' }}
+        >
           <div className="flex items-center space-x-4">
             <div className="p-2 rounded-lg bg-blue-100/50 dark:bg-blue-900/20">
               <Users className="w-5 h-5 text-blue-700 dark:text-blue-300" />
