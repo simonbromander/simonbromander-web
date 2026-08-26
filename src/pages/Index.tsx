@@ -115,7 +115,7 @@ const Index = () => {
               >
                 Shelfie Coffee
               </a>
-              {' — shipped a privacy-first native iOS app for tracking coffee freshness and memorable brews. Package scanning, no account, and private iCloud sync. Now in App Review.'}
+              {' — shipped a privacy-first native iOS app for tracking coffee freshness and memorable brews. Package scanning, no account, and private iCloud sync.'}
             </li>
             <li>
               <a
