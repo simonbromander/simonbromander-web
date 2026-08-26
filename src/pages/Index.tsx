@@ -109,6 +109,16 @@ const Index = () => {
           <ul className="space-y-3 text-neutral-700 dark:text-neutral-300 text-base leading-relaxed">
             <li>
               <a
+                href="/shelfie/"
+                onClick={() => handleRecentClick('shelfie-coffee')}
+                className="font-semibold text-neutral-900 dark:text-neutral-100 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 hover:decoration-neutral-600 dark:hover:decoration-neutral-400"
+              >
+                Shelfie Coffee
+              </a>
+              {' — shipped a privacy-first native iOS app for tracking coffee freshness and memorable brews. Package scanning, no account, and private iCloud sync. Now in App Review.'}
+            </li>
+            <li>
+              <a
                 href="https://www.linkedin.com/feed/update/urn:li:activity:7449740721617674240/"
                 target="_blank"
                 rel="noopener noreferrer"
