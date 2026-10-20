@@ -7,6 +7,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
+import yaml from 'js-yaml';
+
+// gray-matter defaults to the removed js-yaml 3 safeLoad API.
+const frontmatterOptions = { engines: { yaml: yaml.load } };
 
 // Get the directory name
 const __filename = fileURLToPath(import.meta.url);
@@ -44,7 +48,7 @@ try {
       const fileContent = fs.readFileSync(filePath, 'utf8');
       
       // Parse frontmatter
-      const { data } = matter(fileContent);
+      const { data } = matter(fileContent, frontmatterOptions);
       
       if (!data.date || !data.slug) {
         console.log(`  ERROR: Missing date or slug in ${templateFile}`);

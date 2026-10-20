@@ -38,7 +38,7 @@ export function Layout({ children }: LayoutProps) {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 py-12 px-4 relative overflow-hidden md:flex md:items-center">
+    <div className="min-h-screen w-full bg-linear-to-br from-white via-neutral-50 to-neutral-100 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 py-12 px-4 relative overflow-hidden md:flex md:items-center">
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-200/30 dark:bg-purple-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2" />
 
@@ -48,9 +48,9 @@ export function Layout({ children }: LayoutProps) {
 
       <div className="max-w-6xl mx-auto relative w-full">
         <div className="md:flex md:gap-12">
-          <div className="text-center md:text-left md:w-64 flex-shrink-0 md:sticky md:top-12 h-fit animate-fade-up">
+          <div className="text-center md:text-left md:w-64 shrink-0 md:sticky md:top-12 h-fit animate-fade-up">
             <div className="space-y-6">
-              <Avatar className="w-32 h-32 mx-auto md:mx-0 border-4 border-white/80 dark:border-neutral-800/80 shadow-lg backdrop-blur-sm">
+              <Avatar className="w-32 h-32 mx-auto md:mx-0 border-4 border-white/80 dark:border-neutral-800/80 shadow-lg backdrop-blur-xs">
                 <AvatarImage src="lovable-uploads/1630ba4e-617c-4ba9-beac-f977a3cd5ccd.png" />
                 <AvatarFallback>SB</AvatarFallback>
               </Avatar>
@@ -68,7 +68,7 @@ export function Layout({ children }: LayoutProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={handleFintowerClick}
-                    className="bg-gradient-to-r from-purple-500 to-emerald-600 bg-clip-text text-transparent font-semibold hover:opacity-80 transition-opacity"
+                    className="bg-linear-to-r from-purple-500 to-emerald-600 bg-clip-text text-transparent font-semibold hover:opacity-80 transition-opacity"
                   >
                     fintower.ai
                   </a>
@@ -108,7 +108,7 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
 
-          <div className="flex-grow space-y-8 mt-8 md:mt-[7.5rem] min-h-[500px]">
+          <div className="grow space-y-8 mt-8 md:mt-30 min-h-[500px]">
             {children}
           </div>
         </div>

@@ -31,7 +31,7 @@ export function BlogPost({ title, content, html, date, author, thumbnail }: Blog
     <article className="prose prose-lg dark:prose-invert max-w-3xl">
       <header className="mb-8">
         {thumbnail && (
-          <div className="mb-6 w-full max-h-96 overflow-hidden rounded-2xl outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10">
+          <div className="mb-6 w-full max-h-96 overflow-hidden rounded-2xl outline-solid outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10">
             <img
               src={thumbnail}
               alt={title}
@@ -55,7 +55,7 @@ export function BlogPost({ title, content, html, date, author, thumbnail }: Blog
         </div>
       </header>
       <div 
-        className="prose prose-lg dark:prose-invert max-w-3xl [&>p]:dark:text-neutral-200 [&>ul]:dark:text-neutral-200 [&>ol]:dark:text-neutral-200 [&>h1]:dark:text-white [&>h2]:dark:text-white [&>h3]:dark:text-white [&>h4]:dark:text-white"
+        className="prose prose-lg dark:prose-invert max-w-3xl dark:[&>p]:text-neutral-200 dark:[&>ul]:text-neutral-200 dark:[&>ol]:text-neutral-200 dark:[&>h1]:text-white dark:[&>h2]:text-white dark:[&>h3]:text-white dark:[&>h4]:text-white"
         dangerouslySetInnerHTML={{ __html: html || content }}
       />
     </article>
