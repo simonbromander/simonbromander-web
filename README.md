@@ -18,7 +18,7 @@ Changes made via Lovable will be committed automatically to this repo.
 
 If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+The only requirement is having Node.js 22 & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
 Follow these steps:
 
@@ -30,7 +30,7 @@ git clone <YOUR_GIT_URL>
 cd <YOUR_PROJECT_NAME>
 
 # Step 3: Install the necessary dependencies.
-npm i
+npm ci
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
@@ -67,3 +67,11 @@ Simply open [Lovable](https://lovable.dev/projects/dc5991af-d716-4be3-934f-52567
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+
+## Dependency maintenance
+
+npm and `package-lock.json` are the authoritative dependency setup. Run `npm ci`, `npm audit`, and `npm run build` before merging dependency updates. The obsolete Bun lockfile has been removed.
+
+Tailwind 4 replaces Tailwind 3 to remove the unpatched `braces` dependency; class names were migrated with the official upgrader. This requires modern browsers (Safari 16.4+, Chrome 111+, Firefox 128+). The Lovable development tagger was removed because it reintroduced Tailwind 3.
+
+Security overrides pin patched transitive dependencies. `gray-matter` uses an explicit `js-yaml` 4 engine in the blog scripts because its default engine calls the removed `safeLoad` API. Keep that engine when adding frontmatter parsing.

@@ -230,7 +230,7 @@ export default function BlogPostPage() {
     return (
       <Layout>
         <div className="space-y-8">
-          <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40">
+          <div className="backdrop-blur-xs bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40">
             <Button 
               variant="outline" 
               size="sm" 
@@ -261,7 +261,7 @@ export default function BlogPostPage() {
     return (
       <Layout>
         <div className="space-y-8">
-          <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-900/80 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40">
+          <div className="backdrop-blur-xs bg-white/50 dark:bg-neutral-900/80 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40">
             <Button 
               variant="outline" 
               size="sm" 
@@ -297,7 +297,7 @@ export default function BlogPostPage() {
   return (
     <Layout>
       <div className="space-y-8">
-        <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-900/80 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40">
+        <div className="backdrop-blur-xs bg-white/50 dark:bg-neutral-900/80 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40">
           <Button 
             variant="outline" 
             size="sm" 

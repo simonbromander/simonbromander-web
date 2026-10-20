@@ -184,7 +184,7 @@ export default function BlogPage() {
     <Layout>
       <div className="space-y-8">
         <div
-          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 animate-fade-up"
+          className="backdrop-blur-xs bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 animate-fade-up"
           style={{ animationDelay: '120ms' }}
         >
           <h1 className="text-4xl font-bold text-neutral-800 dark:text-neutral-100 mb-4">Blog</h1>
@@ -206,7 +206,7 @@ export default function BlogPage() {
             )}
           </div>
         ) : error ? (
-          <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 text-center">
+          <div className="backdrop-blur-xs bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 text-center">
             <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
             <Button onClick={handleManualRefresh} className="inline-flex items-center gap-2">
               <RefreshCw className="w-4 h-4" />
@@ -214,7 +214,7 @@ export default function BlogPage() {
             </Button>
           </div>
         ) : posts.length === 0 ? (
-          <div className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 text-center">
+          <div className="backdrop-blur-xs bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 text-center">
             <p className="text-neutral-600 dark:text-neutral-400 mb-4">
               No blog posts found. Please check back later or refresh the page.
             </p>

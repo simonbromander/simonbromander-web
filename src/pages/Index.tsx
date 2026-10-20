@@ -34,7 +34,7 @@ const Index = () => {
     <Layout>
       <div className="space-y-8">
         <div
-          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-8 animate-fade-up"
+          className="backdrop-blur-xs bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-8 animate-fade-up"
           style={{ animationDelay: '120ms' }}
         >
           <div className="space-y-2 text-neutral-700 dark:text-neutral-300 text-base">
@@ -45,7 +45,7 @@ const Index = () => {
             <p className="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-500 pt-4">
               Shipped at
             </p>
-            <ul className="space-y-1.5 not-prose !mt-2">
+            <ul className="space-y-1.5 not-prose mt-2!">
               {companies.map((company) => {
                 const faviconDomain = 'faviconDomain' in company ? company.faviconDomain : company.domain;
                 return (
@@ -95,7 +95,7 @@ const Index = () => {
         </div>
 
         <div
-          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6 animate-fade-up"
+          className="backdrop-blur-xs bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6 animate-fade-up"
           style={{ animationDelay: '240ms' }}
         >
           <div className="flex items-center space-x-4">
@@ -149,7 +149,7 @@ const Index = () => {
         </div>
 
         <div
-          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6 animate-fade-up"
+          className="backdrop-blur-xs bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6 animate-fade-up"
           style={{ animationDelay: '360ms' }}
         >
           <div className="flex items-center space-x-4">

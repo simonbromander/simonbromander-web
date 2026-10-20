@@ -7,6 +7,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
+import yaml from 'js-yaml';
+
+// gray-matter defaults to the removed js-yaml 3 safeLoad API.
+const frontmatterOptions = { engines: { yaml: yaml.load } };
 
 // Get the directory name of the current module
 const __filename = fileURLToPath(import.meta.url);
@@ -50,7 +54,7 @@ for (const file of blogFiles) {
     console.log(`Processing ${file}...`);
     const filePath = path.join(BLOG_DIR, file);
     const content = fs.readFileSync(filePath, 'utf8');
-    const { data } = matter(content);
+    const { data } = matter(content, frontmatterOptions);
     
     if (!data.title || !data.slug) {
       console.warn(`  Skipping ${file}: Missing required frontmatter (title or slug)`);
