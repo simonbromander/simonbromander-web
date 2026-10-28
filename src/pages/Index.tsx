@@ -87,7 +87,7 @@ const Index = () => {
           </div>
 
           <div className="space-y-1 text-neutral-700 dark:text-neutral-300 text-base">
-            <p>I turn customer problems into shipped products. AI helps me build faster and spend more time understanding what matters.</p>
+            <p>I turn customer problems into shipped products.</p>
             <p className="text-neutral-600 dark:text-neutral-400">
               Swedish west coast. Gravel cyclist & dad when not on the laptop.
             </p>
