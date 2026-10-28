@@ -87,7 +87,7 @@ const Index = () => {
           </div>
 
           <div className="space-y-1 text-neutral-700 dark:text-neutral-300 text-base">
-            <p>Shipping product every week.</p>
+            <p>I turn customer problems into shipped products. AI helps me build faster and spend more time understanding what matters.</p>
             <p className="text-neutral-600 dark:text-neutral-400">
               Swedish west coast. Gravel cyclist & dad when not on the laptop.
             </p>
@@ -107,6 +107,18 @@ const Index = () => {
             </h2>
           </div>
           <ul className="space-y-3 text-neutral-700 dark:text-neutral-300 text-base leading-relaxed">
+            <li>
+              <a
+                href="https://github.com/simonbromander/Mumla"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => handleRecentClick('mumla')}
+                className="font-semibold text-neutral-900 dark:text-neutral-100 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 hover:decoration-neutral-600 dark:hover:decoration-neutral-400"
+              >
+                Mumla
+              </a>
+              {' — building a native dictation app for macOS and iOS. Converts speech into text using AI that runs on your device.'}
+            </li>
             <li>
               <a
                 href="/shelfie/"
@@ -139,7 +151,7 @@ const Index = () => {
               >
                 Vibe Prototyping
               </a>
-              {' — coined the term. Essay on replacing Figma prototyping with Lovable, Cursor, and Claude. 8 hours → 45 minutes.'}
+              {' — wrote about my approach to vibe prototyping with Lovable, Cursor, and Claude. 8 hours → 45 minutes.'}
             </li>
             <li>
               <span className="font-semibold text-neutral-900 dark:text-neutral-100">Personal AI agent</span>
