@@ -1,4 +1,4 @@
-import { ArrowUpRight, FlaskConical, Terminal } from "lucide-react";
+import { ArrowUpRight, MessageCircle, Repeat2, Terminal, ThumbsUp } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { PortfolioMotion } from "@/components/PortfolioMotion";
 import useAnalytics from "@/hooks/useAnalytics";
@@ -9,6 +9,36 @@ const companies = [
   { name: "Minna Technologies", domain: "minnatechnologies.com", faviconDomain: "mastercard.com", note: "acquired by Mastercard", solidBg: false },
   { name: "Benify", domain: "benify.com", faviconDomain: "benifex.com", note: "now Benifex", solidBg: false },
   { name: "Acando", domain: "cgi.com", faviconDomain: "cgi.com", note: "now CGI", solidBg: false },
+] as const;
+
+const selectedPosts = [
+  {
+    slug: 'vibe-prototyping',
+    title: 'From 8+ hours to 45 minutes',
+    image: '/posts/vibe-prototyping.webp',
+    alt: 'The original prototyping post artwork, showing a Generate Prototype button over Figma',
+    quote: 'My prototyping process has gone from 8+ hours in Figma to 45 minutes with Lovable, Claude and Cursor...',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7310171388349222912/',
+    reactions: 970, comments: 145, reposts: 47,
+  },
+  {
+    slug: 'teaching-prototyping',
+    title: 'Taking the workflow into the classroom',
+    image: '/posts/teaching-prototyping.webp',
+    alt: 'Vibe Prototyping Club illustration from the guest lecture post',
+    quote: 'We transformed simple grocery store filter wireframes into fully functional prototypes in minutes.',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7313076397218967552/',
+    reactions: 251, comments: 19, reposts: 8,
+  },
+  {
+    slug: 'career-transition',
+    title: 'A new chapter in B2B fintech',
+    image: '/posts/career-transition.webp',
+    alt: 'Simon holding his Visma pass beside his cycling equipment on his last day',
+    quote: 'Today marks my last day at Visma Spcs. A bit earlier than planned, but sometimes new opportunities arise that are impossible to deny.',
+    url: 'https://www.linkedin.com/feed/update/urn:li:share:7206013336587505664/',
+    reactions: 116, comments: 24, reposts: null,
+  },
 ] as const;
 
 const Index = () => {
@@ -73,14 +103,27 @@ const Index = () => {
             </div>
           </article>
         </div>
-        <div className="project-row">
-          <img className="row-icon" src="/products/fintower-icon.png" width="40" height="40" alt="" loading="lazy" />
-          <div><h3><a href="https://www.linkedin.com/feed/update/urn:li:activity:7449740721617674240/" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('fintower-self-serve-pivot')}>Fintower's self-serve pivot <ArrowUpRight aria-hidden="true" /></a></h3><p>from pivot decision to 50+ live customers in two months. AI-assisted onboarding, no sales calls, no implementation.</p></div>
+      </section>
+
+      <section className="portfolio-section" aria-labelledby="writing-heading">
+        <div className="writing-heading"><h2 id="writing-heading" className="section-heading">Writing and conversations</h2><a href="https://www.linkedin.com/in/simonbromander/recent-activity/all/" target="_blank" rel="noopener noreferrer">More on LinkedIn <ArrowUpRight aria-hidden="true" /></a></div>
+        <div className="post-grid">
+          {selectedPosts.map(post => <article className="post-preview" key={post.slug}>
+            <a className="post-link" href={post.url} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('linkedin_post_click', { post: post.slug })}>
+              <div className="post-artwork"><img src={post.image} alt={post.alt} width="720" height="720" loading="lazy" /></div>
+              <span className="post-source">Simon Bromander · LinkedIn</span>
+              <h3>{post.title}</h3>
+              <blockquote>“{post.quote}”</blockquote>
+              <div className="post-engagement" aria-label="Public engagement checked 29 October 2026">
+                <span><ThumbsUp aria-hidden="true" />{post.reactions}<span className="sr-only"> reactions</span></span>
+                <span><MessageCircle aria-hidden="true" />{post.comments}<span className="sr-only"> comments</span></span>
+                {post.reposts !== null && <span><Repeat2 aria-hidden="true" />{post.reposts}<span className="sr-only"> reposts</span></span>}
+              </div>
+              <span className="post-read">Read the post <ArrowUpRight aria-hidden="true" /></span>
+            </a>
+          </article>)}
         </div>
-        <div className="project-row">
-          <span className="row-icon experiment-icon"><FlaskConical aria-hidden="true" /></span>
-          <div><h3><a href="https://www.linkedin.com/feed/update/urn:li:activity:7310171388349222912/" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('vibe-prototyping')}>Vibe Prototyping <ArrowUpRight aria-hidden="true" /></a></h3><p>how I moved from slow Figma prototypes to faster learning with Lovable, Cursor, and Claude.</p></div>
-        </div>
+        <p className="engagement-date">Engagement figures checked 29 October 2026.</p>
       </section>
 
       <section className="portfolio-section" aria-labelledby="tools-heading">
