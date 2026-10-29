@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Calendar, FlaskConical, Table2, Terminal } from "lucide-react";
+import { ArrowUpRight, Calendar, FlaskConical, Terminal } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import useAnalytics from "@/hooks/useAnalytics";
 
@@ -98,12 +98,7 @@ const Index = () => {
             <a className="code-link" href="https://github.com/simonbromander/obsidian-claude" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('obsidian-claude')}>View the code<span className="sr-only"> for Obsidian Claude</span><ArrowUpRight aria-hidden="true" /></a>
           </div>
         </div>
-        <div className="project-row">
-          <span className="row-icon grid-icon"><Table2 aria-hidden="true" /></span>
-          <div><h3>Fintower grid exploration</h3><p>A prototype for testing spreadsheet-like interactions in a web app: cell editing, keyboard navigation, range selection, copy and paste, and undo.</p>
-            <a className="code-link" href="https://github.com/simonbromander/fintower-grid-exploration" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('fintower-grid-exploration')}>View the code<span className="sr-only"> for Fintower grid exploration</span><ArrowUpRight aria-hidden="true" /></a>
-          </div>
-        </div>
+
       </section>
 
       <section className="office-hours portfolio-section">

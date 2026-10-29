@@ -145,7 +145,6 @@ a {
 .row-icon svg { width: 22px; height: 22px; }
 .experiment-icon { background: #eadbd0; color: #754329; }
 .terminal-icon { background: #e5dded; color: #63407e; }
-.grid-icon { background: #dce6d8; color: #3b6132; }
 .code-link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 14px; text-decoration: underline; text-underline-offset: 4px; }
 .office-hours { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; padding-bottom: 80px; }
 .booking-button { margin-top: 24px; border-radius: 5px; min-height: 46px; gap: 12px; }
