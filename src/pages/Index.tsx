@@ -1,4 +1,4 @@
-import { ArrowUpRight, MessageCircle, Repeat2, Terminal, ThumbsUp } from "lucide-react";
+import { ArrowUpRight, MessageCircle, Repeat2, Terminal, ThumbsUp, Waves } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { PortfolioMotion } from "@/components/PortfolioMotion";
 import useAnalytics from "@/hooks/useAnalytics";
@@ -74,6 +74,26 @@ const Index = () => {
 
       <section className="portfolio-section" aria-labelledby="recent-heading">
         <h2 id="recent-heading" className="section-heading">Recent</h2>
+        <article className="tide-feature" aria-labelledby="tide-heading">
+          <div className="tide-intro">
+            <div>
+              <p className="section-label">My most ambitious personal project so far.</p>
+              <div className="project-heading"><span className="tide-mark"><Waves aria-hidden="true" /></span><h3 id="tide-heading">Tide</h3></div>
+            </div>
+            <div className="tide-description">
+              <p>A native home for Hermes agents across Mac, iPhone, and Apple Watch. Conversations, documents, interactive cards, and workout logging in one workspace.</p>
+              <p className="release-status">Private testing · Requires an existing Hermes setup.</p>
+              <a className="code-link" href="mailto:me@simonbromander.com?subject=Trying%20Tide" onClick={() => handleRecentClick('tide-access')}>Ask about trying Tide <ArrowUpRight aria-hidden="true" /></a>
+            </div>
+          </div>
+          <figure>
+            <div className="tide-showcase">
+              <img className="tide-mac" src="/products/tide-macos.webp" width="1600" height="1177" alt="Tide on Mac with an agent directory, conversation, and interactive weekly summary" loading="lazy" />
+              <img className="tide-iphone" src="/products/tide-iphone.webp" width="520" height="1131" alt="Tide on iPhone showing a native summary card and suggested reply" loading="lazy" />
+            </div>
+            <figcaption>Development preview with illustrative demo conversations.</figcaption>
+          </figure>
+        </article>
         <div className="product-grid">
           <article className="product-feature">
             <a className="product-visual mumla-visual" href="https://mumla.app" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('mumla')} aria-label="Explore Mumla">

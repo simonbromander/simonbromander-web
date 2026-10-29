@@ -221,3 +221,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
  .post-artwork { aspect-ratio: 1.2; }
  .post-preview h3 { font-size: 24px; }
 }
+
+.tide-feature { margin-bottom: 80px; }
+.tide-intro { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; margin-bottom: 32px; }
+.tide-intro .section-label { margin-bottom: 18px; }
+.tide-intro .project-heading { margin: 0; }
+.tide-mark { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 11px; background: #202725; color: #eeeade; }
+.tide-mark svg { width: 27px; height: 27px; }
+.tide-intro h3 { font-size: 36px; font-weight: 500; letter-spacing: -.025em; }
+.tide-description > p:first-child { font-size: 19px; line-height: 1.6; }
+.tide-description .release-status { margin-top: 14px; font-size: 13px; color: hsl(var(--muted-foreground)); }
+.tide-showcase { position: relative; padding: 40px 18% 40px 40px; background: #e4e7df; border-radius: 6px; }
+.tide-mac { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 12px 32px #22282014; }
+.tide-iphone { position: absolute; width: 21%; height: auto; right: 4%; bottom: 24px; border-radius: 22px; box-shadow: 0 12px 32px #22282024; }
+.tide-feature figcaption { margin-top: 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+@media (max-width: 700px) {
+ .tide-feature { margin-bottom: 56px; }
+ .tide-intro { grid-template-columns: 1fr; gap: 24px; margin-bottom: 28px; }
+ .tide-description > p:first-child { font-size: 18px; }
+ .tide-showcase { padding: 16px 22% 24px 12px; }
+ .tide-iphone { width: 24%; right: 3%; bottom: 12px; border-radius: 10px; }
+ .tide-mac { border-radius: 4px; }
+}
