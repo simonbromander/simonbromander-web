@@ -4,11 +4,11 @@ import { Layout } from "@/components/layout/Layout";
 import useAnalytics from "@/hooks/useAnalytics";
 
 const companies = [
-  { name: "Acando", domain: "cgi.com", faviconDomain: "cgi.com", note: "now CGI", solidBg: false },
-  { name: "Benify", domain: "benify.com", faviconDomain: "benifex.com", note: "now Benifex", solidBg: false },
-  { name: "Minna Technologies", domain: "minnatechnologies.com", faviconDomain: "mastercard.com", note: "acquired by Mastercard", solidBg: false },
-  { name: "Spiris", domain: "spiris.se", note: "formerly Visma Spcs", solidBg: true },
   { name: "Fintower", domain: "fintower.ai", note: null, solidBg: false },
+  { name: "Spiris", domain: "spiris.se", note: "formerly Visma Spcs", solidBg: true },
+  { name: "Minna Technologies", domain: "minnatechnologies.com", faviconDomain: "mastercard.com", note: "acquired by Mastercard", solidBg: false },
+  { name: "Benify", domain: "benify.com", faviconDomain: "benifex.com", note: "now Benifex", solidBg: false },
+  { name: "Acando", domain: "cgi.com", faviconDomain: "cgi.com", note: "now CGI", solidBg: false },
 ] as const;
 
 const Index = () => {
@@ -41,9 +41,9 @@ const Index = () => {
             <h2 className="text-3xl font-bold text-neutral-800 dark:text-neutral-100">
               Designer who ships.
             </h2>
-            <p>10+ years in B2B SaaS</p>
+            <p>10+ years building B2B SaaS products.</p>
             <p className="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-500 pt-4">
-              Shipped at
+              I’ve worked at
             </p>
             <ul className="space-y-1.5 not-prose !mt-2">
               {companies.map((company) => {
@@ -87,9 +87,9 @@ const Index = () => {
           </div>
 
           <div className="space-y-1 text-neutral-700 dark:text-neutral-300 text-base">
-            <p>I turn customer problems into shipped products.</p>
+            <p>I turn customer problems into products people can use.</p>
             <p className="text-neutral-600 dark:text-neutral-400">
-              Swedish west coast. Gravel cyclist & dad when not on the laptop.
+              Based on Sweden’s west coast. Gravel cyclist and dad when I’m not on the laptop.
             </p>
           </div>
         </div>
@@ -117,7 +117,7 @@ const Index = () => {
               >
                 Mumla
               </a>
-              {' — building a native dictation app for macOS and iOS. Converts speech into text using AI that runs on your device.'}
+              {' — a native dictation app for macOS and iOS. Speech-to-text with AI running on your device.'}
             </li>
             <li>
               <a
@@ -127,7 +127,7 @@ const Index = () => {
               >
                 Shelfie Coffee
               </a>
-              {' — shipped a privacy-first native iOS app for tracking coffee freshness and memorable brews. Package scanning, no account, and private iCloud sync.'}
+              {' — a privacy-first native iOS app for tracking coffee freshness and memorable brews. Package scanning, no account, private iCloud sync.'}
             </li>
             <li>
               <a
@@ -139,7 +139,7 @@ const Index = () => {
               >
                 Fintower's self-serve pivot
               </a>
-              {' — 2 months from pivot decision to 50+ live customers. AI-assisted onboarding, zero sales calls, zero implementation.'}
+              {' — from pivot decision to 50+ live customers in two months. AI-assisted onboarding, no sales calls, no implementation.'}
             </li>
             <li>
               <a
@@ -151,14 +151,26 @@ const Index = () => {
               >
                 Vibe Prototyping
               </a>
-              {' — wrote about my approach to vibe prototyping with Lovable, Cursor, and Claude. 8 hours → 45 minutes.'}
-            </li>
-            <li>
-              <span className="font-semibold text-neutral-900 dark:text-neutral-100">Personal AI agent</span>
-              {' — my personal ops staff. Buys groceries, watches Blocket for used cars, drafts cold emails, and flags calendar clashes.'}
+              {' — how I moved from slow Figma prototypes to faster learning with Lovable, Cursor, and Claude.'}
             </li>
           </ul>
         </div>
+
+        <section className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6">
+          <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100">Tools and experiments</h2>
+          <div className="space-y-5 text-neutral-700 dark:text-neutral-300 text-base leading-relaxed">
+            <div className="space-y-2">
+              <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">Obsidian Claude</h3>
+              <p>An Obsidian plugin that brings an AI coding terminal into your notes. Work with code without leaving the context you are already thinking in.</p>
+              <a href="https://github.com/simonbromander/obsidian-claude" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('obsidian-claude')} className="inline-block underline underline-offset-4">View the code<span className="sr-only"> for Obsidian Claude</span></a>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">Fintower grid exploration</h3>
+              <p>A prototype for testing spreadsheet-like interactions in a web app: cell editing, keyboard navigation, range selection, copy and paste, and undo.</p>
+              <a href="https://github.com/simonbromander/fintower-grid-exploration" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('fintower-grid-exploration')} className="inline-block underline underline-offset-4">View the code<span className="sr-only"> for Fintower grid exploration</span></a>
+            </div>
+          </div>
+        </section>
 
         <div
           className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6 animate-fade-up"
@@ -173,7 +185,7 @@ const Index = () => {
             </h2>
           </div>
           <p className="text-neutral-600 dark:text-neutral-400 text-base leading-relaxed">
-            I keep a few 30-minute slots open each month for founders and designers working through product or AI-workflow questions. Free, informal, no pitch.
+            I keep a few 30-minute slots open each month for founders and designers working through product, UX, or AI-workflow questions. Free, informal, and no pitch.
           </p>
           <div className="flex items-center">
             <a
@@ -185,7 +197,7 @@ const Index = () => {
             >
               <Button variant="outline" className="border-neutral-200 dark:border-neutral-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 group">
                 <Calendar className="w-4 h-4 mr-2 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-200" />
-                <span className="text-neutral-700 dark:text-neutral-300">Schedule a call</span>
+                <span className="text-neutral-700 dark:text-neutral-300">Book a call</span>
               </Button>
             </a>
           </div>

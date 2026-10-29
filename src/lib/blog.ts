@@ -83,7 +83,7 @@ Please check the console for more details or refresh the page to try again.`;
 }
 
 // Parse markdown frontmatter
-function parseFrontmatter(content: string): { frontmatter: Record<string, any>; markdownContent: string } {
+function parseFrontmatter(content: string): { frontmatter: Record<string, string>; markdownContent: string } {
   const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
   const match = content.match(frontmatterRegex);
   
@@ -96,7 +96,7 @@ function parseFrontmatter(content: string): { frontmatter: Record<string, any>; 
   const markdownContent = content.slice(match[0].length).trim();
   
   // Very simple YAML parser for frontmatter
-  const frontmatter: Record<string, any> = {};
+  const frontmatter: Record<string, string> = {};
   frontmatterStr.split('\n').forEach(line => {
     const [key, ...valueParts] = line.split(':');
     if (key && valueParts.length) {

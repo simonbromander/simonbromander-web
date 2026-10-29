@@ -1,7 +1,9 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
+import typography from "@tailwindcss/typography";
 
 export default {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -93,7 +95,7 @@ export default {
         "fade-down": "fade-down 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
         "scale": "scale 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
       },
-      typography: (theme: any) => ({
+      typography: (theme: (path: string) => string) => ({
         DEFAULT: {
           css: {
             color: theme('colors.neutral.800'),
@@ -173,7 +175,7 @@ export default {
     },
   },
   plugins: [
-    require("tailwindcss-animate"),
-    require('@tailwindcss/typography'),
+    animate,
+    typography,
   ],
 } satisfies Config;

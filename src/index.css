@@ -1,7 +1,9 @@
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+/* Preserve the existing class-based theme when using Tailwind 4. */
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   :root {

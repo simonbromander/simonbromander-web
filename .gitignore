@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Timestamped blog indexes are generated during each build.
+public/content/blog-index-2*.json

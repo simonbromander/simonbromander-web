@@ -2,6 +2,7 @@ import React from 'react';
 import { format, isValid, parseISO } from 'date-fns';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { sanitizeBlogHtml } from "@/lib/sanitize-blog.mjs";
 
 interface BlogPostProps {
   title: string;
@@ -54,10 +55,10 @@ export function BlogPost({ title, content, html, date, author, thumbnail }: Blog
           )}
         </div>
       </header>
-      <div 
+      <div
         className="prose prose-lg dark:prose-invert max-w-3xl [&>p]:dark:text-neutral-200 [&>ul]:dark:text-neutral-200 [&>ol]:dark:text-neutral-200 [&>h1]:dark:text-white [&>h2]:dark:text-white [&>h3]:dark:text-white [&>h4]:dark:text-white"
-        dangerouslySetInnerHTML={{ __html: html || content }}
+        dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(html || content) }}
       />
     </article>
   );
-} 
+}

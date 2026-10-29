@@ -1,13 +1,20 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { AtSign, Linkedin, Mail } from "lucide-react";
+import { AtSign, Mail } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import useAnalytics from "@/hooks/useAnalytics";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
+
+const Linkedin = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V9h4v2a6 6 0 0 1 2-3Z" />
+    <path d="M2 9h4v12H2z" /><circle cx="4" cy="4" r="2" />
+  </svg>
+);
 
 const socialLinks = [{
   icon: AtSign,
@@ -32,7 +39,7 @@ export function Layout({ children }: LayoutProps) {
   const handleSocialLinkClick = (label: string) => {
     trackEvent('social_link_click', { platform: label });
   };
-  
+
   const handleFintowerClick = () => {
     trackEvent('company_link_click', { company: 'fintower.ai' });
   };
@@ -62,39 +69,39 @@ export function Layout({ children }: LayoutProps) {
                   Simon Bromander
                 </h1>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 text-center md:text-left">
-                  Designing and shipping product at{' '}
+                  Product designer building and shipping at{' '}
                   <a
                     href="https://fintower.ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={handleFintowerClick}
-                    className="bg-gradient-to-r from-purple-500 to-emerald-600 bg-clip-text text-transparent font-semibold hover:opacity-80 transition-opacity"
+                    className="text-purple-700 dark:text-purple-300 font-semibold hover:opacity-80 transition-opacity"
                   >
-                    fintower.ai
+                    Fintower
                   </a>
                 </p>
               </div>
               <div className="space-y-2">
-                <a href="#" className="inline-block px-4 py-2.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">
+                <a href="mailto:me@simonbromander.com" className="inline-block px-4 py-2.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">
                   <div className="flex items-center justify-center gap-2">
                     <span className="relative flex h-3 w-3">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                     </span>
-                    Open for advisory & coaching
+                    Available for selected advisory and coaching work
                   </div>
                 </a>
               </div>
-              
+
               {/* Social Links Section */}
               <div className="space-y-2">
                 <div className="flex flex-col space-y-1">
                   {socialLinks.map((link, index) => (
                     <Button key={index} asChild variant="ghost" size="sm" className="justify-center md:justify-start h-10 px-3 font-normal">
-                      <a 
-                        href={link.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         onClick={() => handleSocialLinkClick(link.label)}
                         className="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400"
                       >
@@ -115,4 +122,4 @@ export function Layout({ children }: LayoutProps) {
       </div>
     </div>
   );
-} 
+}
