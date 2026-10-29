@@ -112,21 +112,21 @@ a {
 .social-links a { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; }
 .social-links a svg { width: 16px; height: 16px; }
 .social-links button { border: 0; background: transparent; position: relative; width: 44px; height: 44px; }
-.portfolio-hero { padding: 80px 0 72px; }
+.portfolio-hero { padding: 80px 0 112px; }
 .hero-role { font-size: 18px; margin-bottom: 20px; }
 .hero-role a { text-decoration: underline; text-underline-offset: 4px; }
 .portfolio-hero h1 { font-size: clamp(64px, 8.5vw, 108px); line-height: .98; letter-spacing: -.04em; font-weight: 500; margin-bottom: 32px; }
 .hero-description { font-size: 21px; line-height: 1.6; max-width: 670px; }
 .hero-description .personal-note { font-size: 16px; color: hsl(var(--muted-foreground)); margin-top: 16px; max-width: 540px; }
-.company-history { margin-top: 44px; }
+.company-history { margin-top: 56px; }
 .section-label { font-size: 13px; color: hsl(var(--muted-foreground)); margin-bottom: 16px; }
 .company-history ul { display: flex; flex-wrap: wrap; gap: 20px 30px; }
 .company-history li { display: flex; flex-direction: column; gap: 4px; }
 .company-history a { font-weight: 500; font-size: 15px; }
 .company-history li span { font-size: 11px; color: hsl(var(--muted-foreground)); }
-.portfolio-section { border-top: 1px solid hsl(var(--foreground) / .16); padding: 36px 0 60px; }
-.section-heading { font-size: 26px; font-weight: 500; letter-spacing: -.025em; margin-bottom: 32px; }
-.product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 44px; }
+.portfolio-section { border-top: 1px solid hsl(var(--foreground) / .16); padding: 56px 0 96px; }
+.section-heading { font-size: 26px; font-weight: 500; letter-spacing: -.025em; margin-bottom: 48px; }
+.product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px 40px; margin-bottom: 64px; }
 .product-visual { display: flex; height: 330px; overflow: hidden; border-radius: 6px; align-items: center; justify-content: center; background: #e4e7df; }
 .mumla-visual { padding: 28px; }
 .mumla-visual img { width: auto; max-width: 100%; height: 100%; object-fit: contain; border-radius: 5px; box-shadow: 0 8px 24px #1e25151a; }
@@ -138,7 +138,7 @@ a {
 .product-feature h3 a, .project-row h3 a { display: inline-flex; align-items: center; gap: 8px; }
 .product-feature h3 svg, .project-row h3 svg, .code-link svg { width: 18px; height: 18px; flex-shrink: 0; }
 .product-feature p, .project-row p, .office-hours p { font-size: 17px; line-height: 1.65; color: hsl(var(--muted-foreground)); }
-.project-row { display: grid; grid-template-columns: 40px 1fr; gap: 20px; padding: 26px 0; border-top: 1px solid hsl(var(--foreground) / .09); }
+.project-row { display: grid; grid-template-columns: 40px 1fr; gap: 20px; padding: 40px 0; border-top: 1px solid hsl(var(--foreground) / .09); }
 .project-row > div { max-width: 770px; }
 .project-row h3 { margin-bottom: 8px; }
 .row-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
@@ -146,7 +146,7 @@ a {
 .experiment-icon { background: #eadbd0; color: #754329; }
 .terminal-icon { background: #e5dded; color: #63407e; }
 .code-link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 14px; text-decoration: underline; text-underline-offset: 4px; }
-.office-hours { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; padding-bottom: 80px; }
+.office-hours { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; padding-bottom: 112px; }
 .booking-button { margin-top: 24px; border-radius: 5px; min-height: 46px; gap: 12px; }
 .site-footer { border-top: 1px solid hsl(var(--foreground) / .16); padding: 28px 0 40px; display: flex; justify-content: space-between; gap: 24px; font-size: 12px; color: hsl(var(--muted-foreground)); }
 .site-footer a { display: flex; align-items: center; gap: 8px; }
@@ -162,20 +162,20 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
  .social-links a { min-height: 44px; }
  .social-links a span { display: none; }
  .social-links a svg { width: 18px; height: 18px; }
- .portfolio-hero { padding: 56px 0; }
+ .portfolio-hero { padding: 56px 0 80px; }
  .hero-role { font-size: 16px; max-width: 270px; }
  .portfolio-hero h1 { font-size: clamp(56px, 13vw, 84px); }
  .hero-description { font-size: 19px; }
  .company-history ul { gap: 20px 24px; }
- .product-grid { grid-template-columns: 1fr; gap: 36px; margin-bottom: 32px; }
+ .product-grid { grid-template-columns: 1fr; gap: 56px; margin-bottom: 48px; }
  .product-visual { height: auto; aspect-ratio: 1.5; }
  .mumla-visual { padding: 20px; }
- .portfolio-section { padding-top: 28px; padding-bottom: 44px; }
- .section-heading { font-size: 24px; }
- .project-row { gap: 14px; }
+ .portfolio-section { padding-top: 40px; padding-bottom: 64px; }
+ .section-heading { font-size: 24px; margin-bottom: 36px; }
+ .project-row { gap: 14px; padding: 32px 0; }
  .project-row h3 { font-size: 19px; }
  .office-hours { grid-template-columns: 1fr; gap: 0; }
- .office-hours .section-heading { margin-bottom: 16px; }
+ .office-hours .section-heading { margin-bottom: 24px; }
  .site-footer { flex-direction: column; gap: 16px; }
 }
 
