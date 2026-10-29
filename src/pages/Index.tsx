@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Calendar, Sparkles, Users } from "lucide-react";
+import { ArrowUpRight, Calendar, FlaskConical, Table2, Terminal } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import useAnalytics from "@/hooks/useAnalytics";
 
@@ -32,177 +32,73 @@ const Index = () => {
 
   return (
     <Layout>
-      <div className="space-y-8">
-        <div
-          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-8 animate-fade-up"
-          style={{ animationDelay: '120ms' }}
-        >
-          <div className="space-y-2 text-neutral-700 dark:text-neutral-300 text-base">
-            <h2 className="text-3xl font-bold text-neutral-800 dark:text-neutral-100">
-              Designer who ships.
-            </h2>
-            <p>10+ years building B2B SaaS products.</p>
-            <p className="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-500 pt-4">
-              I’ve worked at
-            </p>
-            <ul className="space-y-1.5 not-prose !mt-2">
-              {companies.map((company) => {
-                const faviconDomain = 'faviconDomain' in company ? company.faviconDomain : company.domain;
-                return (
-                  <li key={company.domain}>
-                    <a
-                      href={`https://${company.domain}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => handleCompanyClick(company.name)}
-                      className="group inline-flex items-center gap-2 text-base text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
-                    >
-                      <span
-                        className={`inline-flex items-center justify-center w-5 h-5 rounded-sm shrink-0 ${
-                          company.solidBg
-                            ? ''
-                            : 'bg-neutral-200/70 dark:bg-neutral-700/50'
-                        }`}
-                      >
-                        <img
-                          src={`https://www.google.com/s2/favicons?domain=${faviconDomain}&sz=64`}
-                          alt=""
-                          width={16}
-                          height={16}
-                          loading="lazy"
-                          className="w-4 h-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-[filter,opacity] duration-200"
-                        />
-                      </span>
-                      <span>{company.name}</span>
-                      {company.note && (
-                        <span className="text-xs text-neutral-500 dark:text-neutral-500">
-                          ({company.note})
-                        </span>
-                      )}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          <div className="space-y-1 text-neutral-700 dark:text-neutral-300 text-base">
-            <p>I turn customer problems into products people can use.</p>
-            <p className="text-neutral-600 dark:text-neutral-400">
-              Based on Sweden’s west coast. Gravel cyclist and dad when I’m not on the laptop.
-            </p>
-          </div>
+      <section className="portfolio-hero">
+        <h1>Designer<br />who ships.</h1>
+        <p className="hero-role">Product designer building and shipping at <a href="https://fintower.ai" onClick={() => handleCompanyClick('Fintower')}>Fintower</a></p>
+        <div className="hero-description">
+          <p>10+ years building B2B SaaS products.</p>
+          <p>I turn customer problems into products people can use.</p>
+          <p className="personal-note">Based on Sweden’s west coast. Gravel cyclist and dad when I’m not on the laptop.</p>
         </div>
-
-        <div
-          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6 animate-fade-up"
-          style={{ animationDelay: '240ms' }}
-        >
-          <div className="flex items-center space-x-4">
-            <div className="p-2 rounded-lg bg-purple-100/50 dark:bg-purple-900/20">
-              <Sparkles className="w-5 h-5 text-purple-700 dark:text-purple-300" />
-            </div>
-            <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100">
-              Recent
-            </h2>
-          </div>
-          <ul className="space-y-3 text-neutral-700 dark:text-neutral-300 text-base leading-relaxed">
-            <li>
-              <a
-                href="https://github.com/simonbromander/Mumla"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => handleRecentClick('mumla')}
-                className="font-semibold text-neutral-900 dark:text-neutral-100 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 hover:decoration-neutral-600 dark:hover:decoration-neutral-400"
-              >
-                Mumla
-              </a>
-              {' — a native dictation app for macOS and iOS. Speech-to-text with AI running on your device.'}
-            </li>
-            <li>
-              <a
-                href="/shelfie/"
-                onClick={() => handleRecentClick('shelfie-coffee')}
-                className="font-semibold text-neutral-900 dark:text-neutral-100 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 hover:decoration-neutral-600 dark:hover:decoration-neutral-400"
-              >
-                Shelfie Coffee
-              </a>
-              {' — a privacy-first native iOS app for tracking coffee freshness and memorable brews. Package scanning, no account, private iCloud sync.'}
-            </li>
-            <li>
-              <a
-                href="https://www.linkedin.com/feed/update/urn:li:activity:7449740721617674240/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => handleRecentClick('fintower-self-serve-pivot')}
-                className="font-semibold text-neutral-900 dark:text-neutral-100 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 hover:decoration-neutral-600 dark:hover:decoration-neutral-400"
-              >
-                Fintower's self-serve pivot
-              </a>
-              {' — from pivot decision to 50+ live customers in two months. AI-assisted onboarding, no sales calls, no implementation.'}
-            </li>
-            <li>
-              <a
-                href="https://www.linkedin.com/feed/update/urn:li:activity:7310171388349222912/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => handleRecentClick('vibe-prototyping')}
-                className="font-semibold text-neutral-900 dark:text-neutral-100 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 hover:decoration-neutral-600 dark:hover:decoration-neutral-400"
-              >
-                Vibe Prototyping
-              </a>
-              {' — how I moved from slow Figma prototypes to faster learning with Lovable, Cursor, and Claude.'}
-            </li>
-          </ul>
+        <div className="company-history">
+          <p className="section-label">I’ve worked at</p>
+          <ul>{companies.map(company => <li key={company.domain}>
+            <a href={`https://${company.domain}`} target="_blank" rel="noopener noreferrer" onClick={() => handleCompanyClick(company.name)}>{company.name}</a>
+            {company.note && <span>{company.note}</span>}
+          </li>)}</ul>
         </div>
+      </section>
 
-        <section className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6">
-          <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100">Tools and experiments</h2>
-          <div className="space-y-5 text-neutral-700 dark:text-neutral-300 text-base leading-relaxed">
-            <div className="space-y-2">
-              <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">Obsidian Claude</h3>
-              <p>An Obsidian plugin that brings an AI coding terminal into your notes. Work with code without leaving the context you are already thinking in.</p>
-              <a href="https://github.com/simonbromander/obsidian-claude" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('obsidian-claude')} className="inline-block underline underline-offset-4">View the code<span className="sr-only"> for Obsidian Claude</span></a>
-            </div>
-            <div className="space-y-2">
-              <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">Fintower grid exploration</h3>
-              <p>A prototype for testing spreadsheet-like interactions in a web app: cell editing, keyboard navigation, range selection, copy and paste, and undo.</p>
-              <a href="https://github.com/simonbromander/fintower-grid-exploration" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('fintower-grid-exploration')} className="inline-block underline underline-offset-4">View the code<span className="sr-only"> for Fintower grid exploration</span></a>
-            </div>
-          </div>
-        </section>
-
-        <div
-          className="backdrop-blur-sm bg-white/50 dark:bg-neutral-800/50 p-8 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 space-y-6 animate-fade-up"
-          style={{ animationDelay: '360ms' }}
-        >
-          <div className="flex items-center space-x-4">
-            <div className="p-2 rounded-lg bg-blue-100/50 dark:bg-blue-900/20">
-              <Users className="w-5 h-5 text-blue-700 dark:text-blue-300" />
-            </div>
-            <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100">
-              Office hours
-            </h2>
-          </div>
-          <p className="text-neutral-600 dark:text-neutral-400 text-base leading-relaxed">
-            I keep a few 30-minute slots open each month for founders and designers working through product, UX, or AI-workflow questions. Free, informal, and no pitch.
-          </p>
-          <div className="flex items-center">
-            <a
-              href="https://cal.com/simonbromander/office-hours-startup"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleScheduleCallClick}
-              className="inline-flex items-center"
-            >
-              <Button variant="outline" className="border-neutral-200 dark:border-neutral-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 group">
-                <Calendar className="w-4 h-4 mr-2 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-200" />
-                <span className="text-neutral-700 dark:text-neutral-300">Book a call</span>
-              </Button>
+      <section className="portfolio-section" aria-labelledby="recent-heading">
+        <h2 id="recent-heading" className="section-heading">Recent</h2>
+        <div className="product-grid">
+          <article className="product-feature">
+            <a className="product-visual mumla-visual" href="https://github.com/simonbromander/Mumla" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('mumla')} aria-label="Explore Mumla">
+              <img src="/products/mumla-macos.webp" alt="Mumla’s native macOS dictation interface" width="1920" height="1520" />
             </a>
+            <div className="project-heading"><img className="app-icon" src="/products/mumla-icon.webp" width="44" height="44" alt="" /><h3><a href="https://github.com/simonbromander/Mumla" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('mumla')}>Mumla <ArrowUpRight aria-hidden="true" /></a></h3></div>
+            <p>a native dictation app for macOS and iOS. Speech-to-text with AI running on your device.</p>
+          </article>
+          <article className="product-feature">
+            <a className="product-visual shelfie-visual" href="/shelfie/" onClick={() => handleRecentClick('shelfie-coffee')} aria-label="Explore Shelfie Coffee">
+              <img src="/shelfie/promo.png" alt="Shelfie Coffee’s freshness tracking and coffee collection on iPhone" width="1200" height="630" />
+            </a>
+            <div className="project-heading"><img className="app-icon" src="/shelfie/app-icon.png" width="44" height="44" alt="" /><h3><a href="/shelfie/" onClick={() => handleRecentClick('shelfie-coffee')}>Shelfie Coffee <ArrowUpRight aria-hidden="true" /></a></h3></div>
+            <p>a privacy-first native iOS app for tracking coffee freshness and memorable brews. Package scanning, no account, private iCloud sync.</p>
+          </article>
+        </div>
+        <div className="project-row">
+          <img className="row-icon" src="/products/fintower-icon.png" width="40" height="40" alt="" loading="lazy" />
+          <div><h3><a href="https://www.linkedin.com/feed/update/urn:li:activity:7449740721617674240/" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('fintower-self-serve-pivot')}>Fintower's self-serve pivot <ArrowUpRight aria-hidden="true" /></a></h3><p>from pivot decision to 50+ live customers in two months. AI-assisted onboarding, no sales calls, no implementation.</p></div>
+        </div>
+        <div className="project-row">
+          <span className="row-icon experiment-icon"><FlaskConical aria-hidden="true" /></span>
+          <div><h3><a href="https://www.linkedin.com/feed/update/urn:li:activity:7310171388349222912/" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('vibe-prototyping')}>Vibe Prototyping <ArrowUpRight aria-hidden="true" /></a></h3><p>how I moved from slow Figma prototypes to faster learning with Lovable, Cursor, and Claude.</p></div>
+        </div>
+      </section>
+
+      <section className="portfolio-section" aria-labelledby="tools-heading">
+        <h2 id="tools-heading" className="section-heading">Tools and experiments</h2>
+        <div className="project-row">
+          <span className="row-icon terminal-icon"><Terminal aria-hidden="true" /></span>
+          <div><h3>Obsidian Claude</h3><p>An Obsidian plugin that brings an AI coding terminal into your notes. Work with code without leaving the context you are already thinking in.</p>
+            <a className="code-link" href="https://github.com/simonbromander/obsidian-claude" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('obsidian-claude')}>View the code<span className="sr-only"> for Obsidian Claude</span><ArrowUpRight aria-hidden="true" /></a>
           </div>
         </div>
-      </div>
+        <div className="project-row">
+          <span className="row-icon grid-icon"><Table2 aria-hidden="true" /></span>
+          <div><h3>Fintower grid exploration</h3><p>A prototype for testing spreadsheet-like interactions in a web app: cell editing, keyboard navigation, range selection, copy and paste, and undo.</p>
+            <a className="code-link" href="https://github.com/simonbromander/fintower-grid-exploration" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('fintower-grid-exploration')}>View the code<span className="sr-only"> for Fintower grid exploration</span><ArrowUpRight aria-hidden="true" /></a>
+          </div>
+        </div>
+      </section>
+
+      <section className="office-hours portfolio-section">
+        <h2 className="section-heading">Office hours</h2>
+        <div><p>I keep a few 30-minute slots open each month for founders and designers working through product, UX, or AI-workflow questions. Free, informal, and no pitch.</p>
+          <Button asChild className="booking-button"><a href="https://cal.com/simonbromander/office-hours-startup" target="_blank" rel="noopener noreferrer" onClick={handleScheduleCallClick}><Calendar aria-hidden="true" />Book a call<ArrowUpRight aria-hidden="true" /></a></Button>
+        </div>
+      </section>
     </Layout>
   );
 };

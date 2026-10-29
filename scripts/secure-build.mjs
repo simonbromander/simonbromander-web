@@ -42,7 +42,7 @@ async function secureDirectory(directory, themeScripts) {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === import.meta.filename) {
   const themeMarkup = renderToStaticMarkup(React.createElement(ThemeProvider, {
-    attribute: 'class', defaultTheme: 'system', enableSystem: true,
+    attribute: 'class', defaultTheme: 'light', enableSystem: true,
   }));
   const themeScripts = [...themeMarkup.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map((match) => match[1]);
   if (themeScripts.length !== 1) throw new Error('Theme script hash could not be generated');
