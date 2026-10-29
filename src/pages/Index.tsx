@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Calendar, FlaskConical, Terminal } from "lucide-react";
+import { ArrowUpRight, FlaskConical, Terminal } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { PortfolioMotion } from "@/components/PortfolioMotion";
 import useAnalytics from "@/hooks/useAnalytics";
@@ -21,14 +20,6 @@ const Index = () => {
 
   const handleRecentClick = (slug: string) => {
     trackEvent('recent_item_click', { item: slug });
-  };
-
-  const handleScheduleCallClick = () => {
-    trackEvent('schedule_call_click', {
-      source: 'homepage',
-      location: window.location.pathname,
-      timestamp: new Date().toISOString(),
-    });
   };
 
   return (
@@ -103,12 +94,7 @@ const Index = () => {
 
       </section>
 
-      <section className="office-hours portfolio-section">
-        <h2 className="section-heading">Office hours</h2>
-        <div><p>I keep a few 30-minute slots open each month for founders and designers working through product, UX, or AI-workflow questions. Free, informal, and no pitch.</p>
-          <Button asChild className="booking-button"><a href="https://cal.com/simonbromander/office-hours-startup" target="_blank" rel="noopener noreferrer" onClick={handleScheduleCallClick}><Calendar aria-hidden="true" />Book a call<ArrowUpRight aria-hidden="true" /></a></Button>
-        </div>
-      </section>
+
     </Layout>
   );
 };

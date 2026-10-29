@@ -49,7 +49,7 @@ export function Layout({ children }: LayoutProps) {
         </nav>
       </header>
       <main>{children}</main>
-      <footer className="site-footer"><a href="mailto:me@simonbromander.com"><span className="availability-dot" />Available for selected advisory and coaching work</a><span>Simon Bromander</span></footer>
+      <footer className="site-footer"><a href="mailto:me@simonbromander.com" onClick={() => trackEvent('social_link_click', { platform: 'Email', source: 'feedback-invitation' })}>Using something I’ve built? I’d like to hear what works, what breaks, and what’s missing.</a><span>Simon Bromander</span></footer>
     </div>
   );
 }
