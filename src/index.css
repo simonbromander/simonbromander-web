@@ -187,3 +187,17 @@ a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline
 @media (max-width: 700px) {
  .product-feature-wide { grid-template-columns: 1fr; gap: 22px; }
 }
+
+/* Static grain adds texture without continuous rendering or blocking input. */
+.site-shell::before { content: ""; position: fixed; inset: 0; z-index: 10; pointer-events: none; opacity: .035; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' filter='url(%23grain)' opacity='.5' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); }
+.portfolio-hero { position: relative; }
+.portfolio-motion { display: block; pointer-events: none; }
+.motion-hero { position: absolute; right: -12px; top: 72px; width: 400px; height: 350px; }
+.project-heading .portfolio-motion { width: 96px; height: 36px; margin-left: auto; flex-shrink: 0; opacity: .7; }
+@media (min-width: 701px) and (max-width: 1000px) {
+ .motion-hero { width: 250px; right: 0; opacity: .6; }
+}
+@media (max-width: 700px) {
+ .motion-hero { display: none; }
+ .project-heading .portfolio-motion { width: 76px; }
+}
