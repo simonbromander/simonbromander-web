@@ -77,7 +77,6 @@ const Index = () => {
         <article className="tide-feature" aria-labelledby="tide-heading">
           <div className="tide-intro">
             <div>
-              <p className="section-label">My most ambitious personal project so far.</p>
               <div className="project-heading"><span className="tide-mark"><Waves aria-hidden="true" /></span><h3 id="tide-heading">Tide</h3></div>
             </div>
             <div className="tide-description">
