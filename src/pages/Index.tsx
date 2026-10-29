@@ -53,11 +53,13 @@ const Index = () => {
         <h2 id="recent-heading" className="section-heading">Recent</h2>
         <div className="product-grid">
           <article className="product-feature">
-            <a className="product-visual mumla-visual" href="https://github.com/simonbromander/Mumla" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('mumla')} aria-label="Explore Mumla">
+            <a className="product-visual mumla-visual" href="https://mumla.app" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('mumla')} aria-label="Explore Mumla">
               <img src="/products/mumla-macos.webp" alt="Mumla’s native macOS dictation interface" width="1920" height="1520" />
             </a>
-            <div className="project-heading"><img className="app-icon" src="/products/mumla-icon.webp" width="44" height="44" alt="" /><h3><a href="https://github.com/simonbromander/Mumla" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('mumla')}>Mumla <ArrowUpRight aria-hidden="true" /></a></h3></div>
+            <div className="project-heading"><img className="app-icon" src="/products/mumla-icon.webp" width="44" height="44" alt="" /><h3><a href="https://mumla.app" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('mumla')}>Mumla <ArrowUpRight aria-hidden="true" /></a></h3></div>
             <p>a native dictation app for macOS and iOS. Speech-to-text with AI running on your device.</p>
+            <p className="release-status">Available to test with TestFlight</p>
+            <a className="code-link" href="mailto:hello@mumla.app?subject=Test%20Mumla" onClick={() => handleRecentClick('mumla-testflight')}>Request test access<span className="sr-only"> to Mumla by email</span><ArrowUpRight aria-hidden="true" /></a>
           </article>
           <article className="product-feature">
             <a className="product-visual shelfie-visual" href="/shelfie/" onClick={() => handleRecentClick('shelfie-coffee')} aria-label="Explore Shelfie Coffee">
@@ -65,6 +67,17 @@ const Index = () => {
             </a>
             <div className="project-heading"><img className="app-icon" src="/shelfie/app-icon.png" width="44" height="44" alt="" /><h3><a href="/shelfie/" onClick={() => handleRecentClick('shelfie-coffee')}>Shelfie Coffee <ArrowUpRight aria-hidden="true" /></a></h3></div>
             <p>a privacy-first native iOS app for tracking coffee freshness and memorable brews. Package scanning, no account, private iCloud sync.</p>
+            <a className="code-link" href="https://apps.apple.com/app/id6803004011" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('shelfie-app-store')}>View on the App Store<span className="sr-only">: Shelfie Coffee</span><ArrowUpRight aria-hidden="true" /></a>
+          </article>
+          <article className="product-feature product-feature-wide">
+            <a className="product-visual treadtap-visual" href="/treadtap/" onClick={() => handleRecentClick('treadtap')} aria-label="Explore TreadTap">
+              <img src="/treadtap/promo.png" alt="TreadTap walking-pad controls in light and dark mode" width="1320" height="2868" loading="lazy" />
+            </a>
+            <div>
+              <div className="project-heading"><img className="app-icon" src="/treadtap/app-icon.png" width="44" height="44" alt="" loading="lazy" /><h3><a href="/treadtap/" onClick={() => handleRecentClick('treadtap')}>TreadTap <ArrowUpRight aria-hidden="true" /></a></h3></div>
+              <p>A remote and session tracker for compatible Bluetooth walking pads. Control your pace across iPhone, Apple Watch, and Mac. Save completed walks to Apple Health.</p>
+              <a className="code-link" href="https://apps.apple.com/app/id6807523989" target="_blank" rel="noopener noreferrer" onClick={() => handleRecentClick('treadtap-app-store')}>View on the App Store<span className="sr-only">: TreadTap</span><ArrowUpRight aria-hidden="true" /></a>
+            </div>
           </article>
         </div>
         <div className="project-row">
